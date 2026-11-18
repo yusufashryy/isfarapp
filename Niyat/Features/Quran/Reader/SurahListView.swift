@@ -350,50 +350,25 @@ private struct QuranGoalCard: View {
 
     var body: some View {
         Button(action: onTap) {
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: 18) {
                 if let target = goal.goal {
-                    HStack(alignment: .firstTextBaseline) {
-                        Text("Today").sectionLabelStyle()
-                        Spacer()
-                        Label("\(goal.streak)-day streak", systemImage: "flame.fill")
-                            .font(.caption.weight(.bold))
-                            .foregroundStyle(goal.streak > 0 ? Palette.highlight : .secondary)
-                    }
-                    HStack(alignment: .firstTextBaseline, spacing: 6) {
-                        Text("\(goal.today.count)")
-                            .font(.display(30, weight: .heavy))
-                            .contentTransition(.numericText(value: Double(goal.today.count)))
-                        Text("/ \(target) ayat")
-                            .font(.headline)
-                            .foregroundStyle(.secondary)
-                        if goal.today.isComplete {
-                            Image(systemName: "checkmark.seal.fill").foregroundStyle(Palette.highlight)
+                    // The shared streak design on top; today's reading below.
+                    let tier = StreakTier.forDays(goal.streak)
+                    StreakHeader(title: "Qur'an streak", days: goal.streak, tier: tier)
+                    HStack(alignment: .center, spacing: 12) {
+                        VStack(alignment: .leading, spacing: 3) {
+                            Text(statusText(target: target))
+                                .font(.headline)
+                                .fitText(0.7)
+                            Text(continueText)
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.75)
                         }
-                        Spacer()
-                    }
-                    GeometryReader { geo in
-                        ZStack(alignment: .leading) {
-                            Capsule().fill(.white.opacity(0.1))
-                            Capsule()
-                                .fill(LinearGradient(colors: [Palette.accent, Palette.highlight], startPoint: .leading, endPoint: .trailing))
-                                .frame(width: geo.size.width * goal.progress)
-                                .animation(.smooth(duration: 0.6), value: goal.progress)
-                        }
-                    }
-                    .frame(height: 8)
-                    HStack(spacing: 10) {
-                        Text(continueText)
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.8)
-                        Spacer()
-                        Label(goal.today.isComplete ? "Read more" : "Read", systemImage: "book.fill")
-                            .font(.subheadline.weight(.bold))
-                            .foregroundStyle(.black)
-                            .padding(.horizontal, 14)
-                            .padding(.vertical, 8)
-                            .background(Palette.control.gradient, in: .capsule)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        StreakActionLabel(title: goal.today.isComplete ? "Read more" : "Read",
+                                          systemImage: "book.fill")
                     }
                 } else {
                     HStack(spacing: 14) {
@@ -412,12 +387,18 @@ private struct QuranGoalCard: View {
                 }
             }
             .foregroundStyle(.white)
-            .padding(18)
-            .glassPanel(cornerRadius: 26, tint: Palette.glow.opacity(0.3), interactive: true)
+            .streakCardBackground()
         }
         .buttonStyle(.pressable)
         .accessibilityHint(goal.goal == nil ? "Choose how many ayat to read each day" : "Opens the daily reader")
         .onAppear { goal.refresh() }
+    }
+
+    private func statusText(target: Int) -> String {
+        if goal.today.isComplete { return "Today's \(target) ayat done" }
+        let left = max(0, target - goal.today.count)
+        let read = goal.today.count
+        return read == 0 ? "\(target) ayat today" : "\(left) of \(target) ayat to go today"
     }
 
     /// "Continue at Al-Baqarah 2:23", or where a first reading starts.

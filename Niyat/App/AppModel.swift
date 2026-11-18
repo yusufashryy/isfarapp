@@ -52,7 +52,11 @@ final class AppModel {
 
     func reloadJournal() {
         let fresh = PrayerLog.load()
-        if fresh != records { records = fresh }
+        guard fresh != records else { return }
+        records = fresh
+        // Logged from a notification or widget: clear today's streak reminders if it's done.
+        let today = Calendar.current.startOfDay(for: .now)
+        if isComplete(today) { StreakReminders.dayCompleted(dayKey: PrayerLog.dayKey(for: today)) }
     }
 
     // MARK: Prayer times
@@ -142,6 +146,8 @@ final class AppModel {
         if !wasComplete, isComplete(day) { ReviewPrompter.shared.recordHappyMoment() }
         PrayerLog.save(records)
         if record != nil { NotificationScheduler.prayerLogged(prayer, dayKey: PrayerLog.dayKey(for: day)) }
+        // A complete day needs no "streak at risk" or "bring it back" reminder.
+        if isComplete(day) { StreakReminders.dayCompleted(dayKey: PrayerLog.dayKey(for: day)) }
         WidgetCenter.shared.reloadAllTimelines()
         GroupSync.shared.publishSoon()
         #if WATCH
@@ -169,19 +175,16 @@ final class AppModel {
     /// Consecutive days (up to today) where every prayer was logged and none missed.
     /// Today counts once it's complete, but an unfinished today doesn't break the streak.
     func streak(asOf date: Date = .now) -> Int {
-        let calendar = Calendar.current
-        var day = calendar.startOfDay(for: date)
-        if !isComplete(day) { day = calendar.date(byAdding: .day, value: -1, to: day) ?? day }
-        var count = 0
-        while isComplete(day), count < 10_000 {
-            count += 1
-            day = calendar.date(byAdding: .day, value: -1, to: day) ?? day
-        }
-        return count
+        StreakRules.current(asOf: date, records: records)
     }
 
     func isComplete(_ day: Date) -> Bool {
-        PrayerName.obligatory.allSatisfy { record(for: $0, on: day)?.status.keepsStreak ?? false }
+        StreakRules.isComplete(day, records: records)
+    }
+
+    /// Yesterday broke a streak worth keeping, and it can still be brought back today.
+    func streakRecovery(asOf date: Date = .now) -> StreakRecovery? {
+        StreakRules.recovery(asOf: date, records: records)
     }
 
     func stats(for days: [Date]) -> PrayerStats {

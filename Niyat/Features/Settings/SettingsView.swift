@@ -5,6 +5,7 @@ struct SettingsView: View {
     @Environment(AppModel.self) private var model
     @State private var notificationsAuthorized = true
     @AppStorage(Haptics.settingKey) private var hapticsEnabled = true
+    @AppStorage(StreakReminders.enabledKey) private var streakReminders = true
     @State private var testMessage: String?
     @State private var confirmErase = false
     @AppStorage("hasOnboarded") private var hasOnboarded = false
@@ -100,6 +101,8 @@ struct SettingsView: View {
                 } label: {
                     LabeledContent("Athan", value: SettingsStore.athan.muezzin?.name ?? "Standard sound")
                 }
+                Toggle("Streak reminders", isOn: $streakReminders)
+                    .onChange(of: streakReminders) { _, _ in model.refresh() }
                 Button {
                     Task {
                         let sent = await NotificationScheduler.sendTest(location: model.location,
@@ -130,7 +133,7 @@ struct SettingsView: View {
             } header: {
                 Text("Adhan notifications")
             } footer: {
-                Text("iOS limits how many alerts an app can queue, so the more alert times you choose, the fewer days ahead are covered. Open Niyat every couple of days to keep them coming.")
+                Text("Streak reminders nudge you in the evening when today isn't fully logged, and help you bring a streak back the morning after it slips. iOS limits how many alerts an app can queue, so the more alert times you choose, the fewer days ahead are covered. Open Niyat every couple of days to keep them coming.")
             }
 
 

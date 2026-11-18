@@ -6,6 +6,8 @@ import Foundation
 ///
 /// - `-demo`: London, a few days of ticked-off prayers, some tasbih counts.
 /// - `-demoOnboarding`: wipes everything so the welcome screens show.
+/// - `-streakDays N`: adds N completed days of prayers and Qur'an (ending
+///   yesterday) on top of what's there, to see the streak at any level.
 enum DemoMode {
     static func prepareIfRequested() {
         let arguments = ProcessInfo.processInfo.arguments
@@ -13,12 +15,40 @@ enum DemoMode {
         if arguments.contains("-demo") || arguments.contains("-demoOnboarding") {
             UserDefaults.standard.set(true, forKey: TutorialView.seenKey)
         }
+        if let index = arguments.firstIndex(of: "-streakDays"), index + 1 < arguments.count,
+           let days = Int(arguments[index + 1]), days > 0 {
+            addStreak(days: days)
+        }
         if arguments.contains("-demoOnboarding") {
             UserDefaults.standard.set(false, forKey: "hasOnboarded")
             SettingsStore.location = nil
         } else if arguments.contains("-demo") {
             seed()
         }
+    }
+
+    /// Every prayer on time and the Qur'an goal met, for the `days` days
+    /// before today. Keeps everything else.
+    private static func addStreak(days: Int) {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: .now)
+        var records = PrayerLog.load()
+        let goal = QuranProgress.dailyGoal ?? 10
+        QuranProgress.dailyGoal = goal
+        var quranDays = QuranProgress.allDays()
+        for offset in 1...days {
+            guard let day = calendar.date(byAdding: .day, value: -offset, to: today) else { continue }
+            for prayer in PrayerName.obligatory {
+                records[PrayerLog.key(prayer, on: day)] = PrayerRecord(status: .onTime)
+            }
+            var entry = QuranDay(goal: goal)
+            entry.verses = Set((1...goal).map { "3:\($0 + offset)" })
+            entry.letters = goal * 38
+            entry.completedAt = day.addingTimeInterval(20 * 3600)
+            quranDays[QuranProgress.dayKey(for: day.addingTimeInterval(12 * 3600))] = entry
+        }
+        PrayerLog.save(records)
+        AppGroup.defaults.setEncoded(quranDays, forKey: "quran.days")
     }
 
     private static func seed() {

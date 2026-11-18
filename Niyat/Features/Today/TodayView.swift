@@ -10,34 +10,49 @@ struct TodayView: View {
     /// One spring for both ways, so opening and closing feel the same.
     static let morph = Animation.spring(duration: 0.65, bounce: 0.18)
 
+    /// Scroll target for the top bar's streak flame.
+    private static let streakCardID = "streakCard"
+
     var body: some View {
         NavigationStack {
-            // Re-render every 30s so the dial, highlights and prompts move on by themselves.
-            TimelineView(.periodic(from: .now, by: 30)) { context in
-                ScrollView {
-                    content(now: context.date)
-                        .padding(.horizontal, 16)
-                        .padding(.bottom, 28)
-                        .readableWidth()
-                }
-                .scrollEdgeEffectStyle(.soft, for: .top)
-                .background { SkyBackdrop(prayer: skyPrayer(at: context.date)) }
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Text(Date.now.formatted(.dateTime.weekday(.wide).day().month(.wide)))
-                        .font(.headline)
-                        .fixedSize()
-                        .padding(.horizontal, 12)
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink {
-                        SettingsView()
-                    } label: {
-                        Image(systemName: "gearshape.fill")
+            ScrollViewReader { scroller in
+                // Re-render every 30s so the dial, highlights and prompts move on by themselves.
+                TimelineView(.periodic(from: .now, by: 30)) { context in
+                    ScrollView {
+                        content(now: context.date)
+                            .padding(.horizontal, 16)
+                            .padding(.bottom, 28)
+                            .readableWidth()
                     }
-                    .accessibilityLabel("Settings")
+                    .scrollEdgeEffectStyle(.soft, for: .top)
+                    .background { SkyBackdrop(prayer: skyPrayer(at: context.date)) }
+                }
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Text(Date.now.formatted(.dateTime.weekday(.abbreviated).day().month(.abbreviated)))
+                            .font(.headline)
+                            .fixedSize()
+                            .padding(.horizontal, 12)
+                    }
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            withAnimation(.smooth) { scroller.scrollTo(Self.streakCardID, anchor: .center) }
+                        } label: {
+                            StreakPill(days: model.streak(asOf: .now))
+                        }
+                        .accessibilityHint("Shows your prayer streak")
+                    }
+                    // Its own capsule, apart from Settings.
+                    ToolbarSpacer(.fixed, placement: .topBarTrailing)
+                    ToolbarItem(placement: .topBarTrailing) {
+                        NavigationLink {
+                            SettingsView()
+                        } label: {
+                            Image(systemName: "gearshape.fill")
+                        }
+                        .accessibilityLabel("Settings")
+                    }
                 }
             }
             .sheet(item: $checkIn) { slot in
@@ -102,10 +117,13 @@ struct TodayView: View {
                         .appearAnimation(2 + index)
                     }
                 }
-            }
 
-            StreakStrip(now: now)
-                .appearAnimation(9)
+                // After the prayers, so logging comes first; the top bar's
+                // flame shows the streak on opening and scrolls here.
+                StreakCard(now: now) { checkIn = $0 }
+                    .id(Self.streakCardID)
+                    .appearAnimation(8)
+            }
 
             HStack {
                 Spacer()
@@ -550,57 +568,6 @@ private struct PrayerTimeRow: View {
         .buttonStyle(.pressable)
         .haptic(.selection, trigger: enabled)
         .accessibilityLabel(enabled ? "Turn off \(time.name.englishName) alert" : "Turn on \(time.name.englishName) alert")
-    }
-}
-
-// MARK: - Streak
-
-private struct StreakStrip: View {
-    @Environment(AppModel.self) private var model
-    let now: Date
-
-    var body: some View {
-        let calendar = Calendar.current
-        let today = calendar.startOfDay(for: now)
-        let days = (0..<7).reversed().compactMap { calendar.date(byAdding: .day, value: -$0, to: today) }
-        let streak = model.streak(asOf: now)
-
-        VStack(alignment: .leading, spacing: 14) {
-            HStack {
-                Label(streak == 1 ? "1 day streak" : "\(streak) day streak", systemImage: "flame.fill")
-                    .font(.headline)
-                    .fitText(0.5)
-                    .foregroundStyle(streak > 0 ? Palette.highlight : .secondary)
-                    .contentTransition(.numericText(value: Double(streak)))
-                Spacer()
-                Text("Last 7 days").sectionLabelStyle().fitText(0.5)
-            }
-            HStack {
-                ForEach(days, id: \.self) { day in
-                    let count = model.prayedCount(on: day)
-                    let isToday = calendar.isDate(day, inSameDayAs: today)
-                    VStack(spacing: 6) {
-                        ZStack {
-                            EightPointStar()
-                                .fill(model.isComplete(day) ? Palette.highlight : Color.white.opacity(0.06))
-                            EightPointStar()
-                                .trim(from: 0, to: CGFloat(count) / 5)
-                                .stroke(Palette.accent, style: StrokeStyle(lineWidth: 2, lineCap: .round))
-                        }
-                        .frame(width: 30, height: 30)
-                        Text(day.formatted(.dateTime.weekday(.narrow)))
-                            .font(.caption2.weight(isToday ? .heavy : .regular))
-                            .fitText()
-                            .foregroundStyle(isToday ? .primary : .secondary)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .accessibilityElement(children: .ignore)
-                    .accessibilityLabel("\(day.formatted(.dateTime.weekday(.wide))): \(count) of 5 prayers")
-                }
-            }
-        }
-        .padding(18)
-        .surface(cornerRadius: 26)
     }
 }
 

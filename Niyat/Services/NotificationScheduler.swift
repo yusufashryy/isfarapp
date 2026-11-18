@@ -128,6 +128,11 @@ enum NotificationScheduler {
             candidates += quranReminderRequests(settings: quranReminders, now: now)
         }
 
+        // Streak at risk / bring it back, timed around Isha where we know it.
+        candidates += StreakReminders.requests(now: now, records: PrayerLog.load()) { day in
+            location.flatMap { PrayerCalculator.schedule(for: day, location: $0, settings: prayerSettings)?.time(for: .isha)?.date }
+        }
+
         // The hadiths are only read (off the main thread, once) if the daily hadith is on.
         let hadithSettings = HadithReminderSettings.saved
         if hadithSettings.isEnabled, let index = await HadithLibrary.shared.load() {
