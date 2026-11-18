@@ -124,17 +124,19 @@ struct QuranSettingsView: View {
                         }
                         Toggle("Continue to the next verse", isOn: Binding(
                             get: { player.continuous }, set: { player.continuous = $0 }))
+                        // Hafs uses the built-in model; other riwayat need speech recognition.
+                        let usesModel = ReciterWordSync.usesModel(for: store.edition)
                         Toggle("Follow the reciter word by word", isOn: Binding(
-                            get: { wordSync && speechStatus == .authorized && speechOnDevice },
+                            get: { wordSync && (usesModel || (speechStatus == .authorized && speechOnDevice)) },
                             set: { on in
                                 wordSync = on
                                 ReciterWordSync.shared.reset()
-                                guard on, speechStatus == .notDetermined else { return }
+                                guard on, !usesModel, speechStatus == .notDetermined else { return }
                                 SFSpeechRecognizer.requestAuthorization { status in
                                     Task { @MainActor in speechStatus = status }
                                 }
                             }))
-                            .disabled(!speechOnDevice || speechStatus == .denied || speechStatus == .restricted)
+                            .disabled(!usesModel && (!speechOnDevice || speechStatus == .denied || speechStatus == .restricted))
                     } else {
                         Label("No verified verse-by-verse audio for \(store.edition.riwayah.title) yet, so recitation is off to keep text and audio in sync.",
                               systemImage: "speaker.slash")

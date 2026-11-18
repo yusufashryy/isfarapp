@@ -123,6 +123,8 @@ enum RecitationAligner {
     struct Score {
         /// Best log-probability reached by each piece used for the word.
         let pieces: [Float]
+        /// First frame of the audio aligned to the word (when it starts).
+        var start: Int = 0
         var mean: Float { pieces.reduce(0, +) / Float(max(pieces.count, 1)) }
         var worst: Float { pieces.min() ?? -.infinity }
     }
@@ -223,12 +225,14 @@ enum RecitationAligner {
 
         // Back through the path: the best value each arc reached.
         var best = [Int: Float]()
+        var firstFrame = [Int](repeating: Int.max, count: words.count)
         var arc: Int? = entrySource[finalNode] >= 0 ? Int(entrySource[finalNode]) : nil
         var node = finalNode
         var t = T - 1
         while t >= 0 {
             if let k = arc {
                 best[k] = max(best[k] ?? neg, G[t * groupCount + arcs[k].group])
+                firstFrame[arcs[k].word] = min(firstFrame[arcs[k].word], t)
                 if t == 0 { break }
                 if stayed[t * K + k] {
                     t -= 1
@@ -244,6 +248,8 @@ enum RecitationAligner {
         }
         var pieces = [[Float]](repeating: [], count: words.count)
         for (k, value) in best { pieces[arcs[k].word].append(value) }
-        return pieces.map { Score(pieces: $0.isEmpty ? [neg] : $0) }
+        return pieces.indices.map { w in
+            Score(pieces: pieces[w].isEmpty ? [neg] : pieces[w], start: firstFrame[w] == Int.max ? 0 : firstFrame[w])
+        }
     }
 }
