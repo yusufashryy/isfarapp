@@ -33,10 +33,10 @@ packages:
   Adhan:
     url: https://github.com/batoulapps/adhan-swift
     from: "1.5.0"
-  # Runs the built-in recitation model on the iPhone.
+  # Runs the built-in recitation model on the iPhone. A copy of Microsoft's
+  # package (its GitHub repo was removed); see Packages/onnxruntime.
   onnxruntime:
-    url: https://github.com/microsoft/onnxruntime-swift-package-manager
-    from: "1.20.0"
+    path: Packages/onnxruntime
 
 # Prayer Lock (Screen Time) needs a paid Apple Developer account, so it lives in
 # its own file and is only switched on by `make full`.

@@ -33,7 +33,7 @@ Arabic dhikr phrases in `Shared/Tasbih.swift` are standard phrases, not copied f
 
 ## Recitation model
 
-- **QuranKarim speech-to-text** by TheGreatQuran, [huggingface.co/TheGreatQuran/QuranKarim-SpeechToText-onnxModel](https://huggingface.co/TheGreatQuran/QuranKarim-SpeechToText-onnxModel), licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Bundled unmodified and run on the iPhone with [ONNX Runtime](https://github.com/microsoft/onnxruntime) (MIT).
+- **QuranKarim speech-to-text** by TheGreatQuran, [huggingface.co/TheGreatQuran/QuranKarim-SpeechToText-onnxModel](https://huggingface.co/TheGreatQuran/QuranKarim-SpeechToText-onnxModel), licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Bundled unmodified and run on the iPhone with [ONNX Runtime](https://github.com/microsoft/onnxruntime) (MIT). Its Swift package (Microsoft's `onnxruntime-swift-package-manager` 1.24.2, MIT) is kept in `Packages/onnxruntime` because the upstream repository was removed in November 2026; the runtime binary still comes from download.onnxruntime.ai, checked by SHA-256.
 
 ## Mushaf line layout
 
