@@ -463,8 +463,28 @@ private struct VerseCard: View {
     let onTafsir: (() -> Void)?
     let onToggleSaved: () -> Void
 
-    /// The ribbon's width plus a little room either side.
+    /// Room for one ribbon plus a little either side.
     private static let ribbonGap: CGFloat = 24
+    private static let ribbonWidth: CGFloat = 16
+    private static let ribbonSpacing: CGFloat = 4
+    /// At most this many bookmark ribbons hang on one verse.
+    private static let maxBookmarkRibbons = 3
+
+    private var isMarked: Bool { hasRibbon || !bookmarks.isEmpty }
+
+    /// Red for the reading ribbon, otherwise the first bookmark's colour.
+    private var markColor: Color {
+        hasRibbon ? Color(QuranTextStyle.ribbonRed) : bookmarks.first?.color.color ?? .clear
+    }
+
+    private var shownBookmarks: [VerseBookmark] { Array(bookmarks.prefix(Self.maxBookmarkRibbons)) }
+
+    /// Middle gap in the top row, wide enough for every ribbon hanging there.
+    private var gapWidth: CGFloat {
+        let count = CGFloat((hasRibbon ? 1 : 0) + shownBookmarks.count)
+        guard count > 1 else { return Self.ribbonGap }
+        return count * Self.ribbonWidth + (count - 1) * Self.ribbonSpacing + 8
+    }
 
     @ViewBuilder
     private var actionButtons: some View {
@@ -527,6 +547,33 @@ private struct VerseCard: View {
         return bookmarks.first?.color.color ?? Color.secondary
     }
 
+    private var ribbons: some View {
+        HStack(alignment: .top, spacing: Self.ribbonSpacing) {
+            if hasRibbon {
+                RibbonMark(color: Color(QuranTextStyle.ribbonRed), starColor: .white)
+                    .frame(width: Self.ribbonWidth, height: 30)
+                    .transition(.move(edge: .top).combined(with: .opacity))
+                    .accessibilityElement()
+                    .accessibilityLabel("Your ribbon is here")
+            }
+            if !shownBookmarks.isEmpty {
+                // Tap a bookmark ribbon to see its name and note.
+                Button(action: onBookmark) {
+                    HStack(alignment: .top, spacing: Self.ribbonSpacing) {
+                        ForEach(shownBookmarks) { bookmark in
+                            RibbonMark(color: bookmark.color.color, starColor: .white)
+                                .frame(width: Self.ribbonWidth, height: 30)
+                                .transition(.move(edge: .top).combined(with: .opacity))
+                        }
+                    }
+                    .contentShape(.rect)
+                }
+                .buttonStyle(.pressable)
+                .accessibilityLabel("Bookmarks: \(bookmarks.map(\.title).joined(separator: ", "))")
+            }
+        }
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             // Top row in two halves around a gap in the middle, where the
@@ -549,7 +596,7 @@ private struct VerseCard: View {
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                Color.clear.frame(width: Self.ribbonGap, height: 1)
+                Color.clear.frame(width: gapWidth, height: 1)
                 HStack(spacing: 2) { actionButtons }
                     .frame(maxWidth: .infinity, alignment: .trailing)
             }
@@ -563,52 +610,26 @@ private struct VerseCard: View {
                     .foregroundStyle(.white.opacity(0.72))
             }
 
-            // Your special bookmarks here, as small tags; tap to see the notes.
-            if !bookmarks.isEmpty {
-                Button(action: onBookmark) {
-                    HStack(spacing: 6) {
-                        ForEach(bookmarks.prefix(3)) { bookmark in
-                            Label(bookmark.title, systemImage: "bookmark.fill")
-                                .font(.caption.weight(.semibold))
-                                .lineLimit(1)
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 5)
-                                .foregroundStyle(bookmark.color.color)
-                                .background(bookmark.color.color.opacity(0.16), in: .capsule)
-                        }
-                        if bookmarks.count > 3 {
-                            Text("+\(bookmarks.count - 3)").font(.caption.weight(.semibold)).foregroundStyle(.secondary)
-                        }
-                    }
-                }
-                .buttonStyle(.pressable)
-                .accessibilityLabel("Bookmarks: \(bookmarks.map(\.title).joined(separator: ", "))")
-            }
         }
         .padding(18)
         .surface(cornerRadius: 22)
-        // The ribbon's verse stays outlined, so your place is easy to find again.
+        // A marked verse is outlined and tinted in its ribbon's colour (red for
+        // Continue reading, else the first bookmark's), so it's easy to find again.
         .overlay {
             RoundedRectangle(cornerRadius: 22)
-                .strokeBorder(isReciting ? Palette.accent.opacity(0.8) : Color(QuranTextStyle.ribbonRed).opacity(hasRibbon ? 0.7 : 0),
+                .strokeBorder(isReciting ? Palette.accent.opacity(0.8) : markColor.opacity(isMarked ? 0.7 : 0),
                               lineWidth: 1.5)
         }
         .background {
-            RoundedRectangle(cornerRadius: 22).fill(Color(QuranTextStyle.ribbonRed).opacity(hasRibbon ? 0.12 : 0))
+            RoundedRectangle(cornerRadius: 22).fill(markColor.opacity(isMarked ? 0.12 : 0))
         }
         .shadow(color: Palette.accent.opacity(isReciting ? 0.35 : 0), radius: 12)
-        // The ribbon hangs from the middle of the top of the verse it marks.
-        .overlay(alignment: .top) {
-            if hasRibbon {
-                RibbonMark(color: Color(QuranTextStyle.ribbonRed), starColor: .white)
-                    .frame(width: 16, height: 30)
-                    .transition(.move(edge: .top).combined(with: .opacity))
-                    .accessibilityElement()
-                    .accessibilityLabel("Your ribbon is here")
-            }
-        }
+        // Ribbons hang from the middle of the top of the verse they mark: red
+        // for Continue reading, then one in each bookmark's own colour.
+        .overlay(alignment: .top) { ribbons }
         .animation(.smooth(duration: 0.4), value: isReciting)
         .animation(.smooth(duration: 0.3), value: hasRibbon)
+        .animation(.bouncy(duration: 0.4), value: bookmarks.map(\.id))
         .contextMenu {
             if showsPlay {
                 Button("Play from here", systemImage: "play.fill") { onPlay() }
