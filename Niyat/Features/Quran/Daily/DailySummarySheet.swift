@@ -82,10 +82,7 @@ struct DailySummarySheet: View {
                     .foregroundStyle(.white.opacity(0.75))
                     .lineLimit(2)
                 StreakBadge(days: goal.streak)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 3)
-                    .background(StreakTier.forDays(goal.streak).tint.opacity(goal.streak > 0 ? 0.14 : 0.06), in: .capsule)
-                    .padding(.top, 2)
+                    .padding(.top, 4)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }

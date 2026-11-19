@@ -712,9 +712,8 @@ struct GoalCelebration: View {
             }
             Text("Goal complete")
                 .font(.display(26, weight: .heavy))
-            Text("🔥 \(streak)-day Qur'an streak")
-                .font(.headline)
-                .foregroundStyle(Palette.highlight)
+            // The app's own animated flame, not the emoji.
+            StreakBadge(days: streak, label: "day Qur'an streak", size: 18, burst: burst ? 1 : 0)
             Text("Alhamdulillah")
                 .font(.calligraphy(size: 26))
                 .foregroundStyle(.secondary)

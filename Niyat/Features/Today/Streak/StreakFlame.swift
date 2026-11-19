@@ -12,6 +12,9 @@ struct StreakFlame: View {
     var burst: Int = 0
     /// Grow with the level (the card). Off where it's a small icon (badges).
     var scalesWithTier = true
+    /// Icon size, next to text (pills, badges): no wide glow, which smears
+    /// into a blob at this size.
+    var compact = false
 
     static let frameCount = 78
     static let framesPerSecond = 48.0
@@ -27,7 +30,7 @@ struct StreakFlame: View {
             GeometryReader { geo in
                 let size = geo.size
                 ZStack(alignment: .bottom) {
-                    glow(size: size)
+                    if !compact { glow(size: size) }
                     sprite(frame: frame(at: time), size: size)
                 }
                 .frame(width: size.width, height: size.height, alignment: .bottom)
@@ -72,24 +75,50 @@ struct StreakFlame: View {
     }
 }
 
-/// "9-day streak" with a small live flame, coloured by the streak's level,
-/// so every streak in the app looks the same.
+/// "🔥 9 day streak" as a capsule in the level's flame colours: the live
+/// flame, the count in the same flowing gradient as the streak cards, and
+/// the label. Used wherever a streak is mentioned so they all match.
 struct StreakBadge: View {
     let days: Int
+    /// Follows the number: "day streak", or "day Qur'an streak".
+    var label = "day streak"
+    /// The label's point size; the flame, number and capsule scale with it.
+    var size: CGFloat = 15
+    var burst = 0
 
     var body: some View {
         let tier = StreakTier.forDays(days)
-        HStack(alignment: .lastTextBaseline, spacing: 4) {
-            // The flame stands on the text's baseline, never dipping below it.
-            StreakFlame(tier: tier, scalesWithTier: false)
-                .frame(width: 24, height: 34)
-                .alignmentGuide(.lastTextBaseline) { $0[.bottom] }
-            Text("\(days)-day streak")
-                .font(.caption.weight(.bold))
-                .foregroundStyle(tier.tint)
-                .contentTransition(.numericText(value: Double(days)))
+        let colors = tier.flameColors
+        HStack(spacing: size * 0.55) {
+            StreakFlame(tier: tier, burst: burst, scalesWithTier: false, compact: true)
+                .frame(width: size * 1.9 * StreakFlame.aspectRatio, height: size * 1.9)
+                .shadow(color: colors.rim.opacity(tier == .ember ? 0 : 0.6), radius: size * 0.3)
+                // The flame's body is in the lower part of its frame (sparks
+                // above); lift it so the body, not the frame, centres on the text.
+                .offset(y: -size * 0.18)
+            HStack(alignment: .firstTextBaseline, spacing: size * 0.35) {
+                Text("\(days)")
+                    .font(.system(size: size * 1.35, weight: .heavy, design: .rounded))
+                    .monospacedDigit()
+                    .streakGradient(tier)
+                    .contentTransition(.numericText(value: Double(days)))
+                Text(label)
+                    .font(.system(size: size, weight: .bold, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.88))
+            }
+            // Sit the text a little lower, level with the flame's body.
+            .offset(y: size * 0.14)
         }
-        .accessibilityElement(children: .combine)
+        .padding(.leading, size * 0.8)
+        .padding(.trailing, size * 1.0)
+        .padding(.vertical, size * 0.4)
+        .background {
+            Capsule().fill(LinearGradient(colors: [colors.rim.opacity(0.3), colors.fill.opacity(0.07)],
+                                          startPoint: .leading, endPoint: .trailing))
+        }
+        .overlay { Capsule().strokeBorder(colors.rim.opacity(0.45), lineWidth: 1) }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(days) \(label)")
     }
 }
 

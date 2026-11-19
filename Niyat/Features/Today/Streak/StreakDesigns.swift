@@ -32,6 +32,9 @@ struct StreakHeader: View {
                     }
                     .fitText(0.7)
                 }
+                // The flame is drawn from the bottom of its frame, so it sits
+                // low; drop the title and count to line up with it.
+                .padding(.top, 14)
                 .accessibilityElement(children: .combine)
                 Spacer(minLength: 0)
             }
@@ -138,16 +141,23 @@ struct StreakPill: View {
 
     var body: some View {
         let tier = StreakTier.forDays(days)
-        HStack(spacing: 10) {
-            StreakFlame(tier: tier, scalesWithTier: false)
-                .frame(width: 20, height: 26)
+        HStack(alignment: .center, spacing: 7) {
+            // The clean, whole-flame frames with a close glow, its body lifted
+            // to centre on the number (the sparks sit above it).
+            StreakFlame(tier: tier, scalesWithTier: false, compact: true)
+                .frame(width: 32 * StreakFlame.aspectRatio, height: 32)
+                .shadow(color: tier.flameColors.rim.opacity(tier == .ember ? 0 : 0.6), radius: 5)
+                .offset(y: -3)
             Text("\(days)")
-                .font(.headline.weight(.heavy))
+                .font(.system(.title3, design: .rounded).weight(.heavy))
                 .monospacedDigit()
                 .streakGradient(tier)
                 .contentTransition(.numericText(value: Double(days)))
+                // Level with the flame's body, which sits low in its frame.
+                .offset(y: 2)
         }
-        .padding(.horizontal, 10)
+        // Equal on both sides so the pair sits in the middle of the capsule.
+        .padding(.horizontal, 8)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(days == 1 ? "1 day prayer streak" : "\(days) day prayer streak")
     }
