@@ -24,7 +24,9 @@ struct WordTimings: Codable, Equatable {
 /// Highlights the word the reciter is saying.
 ///
 /// Niyat's recitation audio has no published word timings, so each ayah's
-/// recording is aligned on the iPhone: Apple's speech recognition transcribes
+/// recording is aligned on the iPhone: for Hafs, Niyat's built-in recitation
+/// model force-aligns the verified words to the recording
+/// (`ReciterModelTimings`); otherwise Apple's speech recognition transcribes
 /// the reciter (with the time of each word), and the words it recognised are
 /// matched to the verified text by the same aligner as live recitation. An
 /// ayah is only followed word by word when most of its words (60%) were
@@ -36,12 +38,19 @@ final class ReciterWordSync {
     static let shared = ReciterWordSync()
     static let settingKey = "quran.wordSync"
 
-    /// Settings › Qur'an › Follow the reciter word by word. It also needs
-    /// speech recognition permission, which is asked for in Settings or by
-    /// live recitation, never when pressing play.
+    /// Settings › Qur'an › Follow the reciter word by word. Hafs needs
+    /// nothing more (the built-in model); Warsh and Qalun also need speech
+    /// recognition permission, asked for in Settings or by live recitation,
+    /// never when pressing play.
     var isEnabled: Bool {
         (UserDefaults.standard.object(forKey: Self.settingKey) as? Bool ?? true)
-            && SFSpeechRecognizer.authorizationStatus() == .authorized
+            && (Self.usesModel(for: QuranStore.shared.edition) || SFSpeechRecognizer.authorizationStatus() == .authorized)
+    }
+
+    /// Hafs recordings are aligned by the built-in recitation model, which
+    /// needs no permission; Warsh and Qalun use Apple's speech recognition.
+    static func usesModel(for edition: QuranEdition) -> Bool {
+        edition.riwayah == .hafs && RecitationModel.isBundled
     }
 
     private struct Job {
@@ -50,6 +59,7 @@ final class ReciterWordSync {
         let tokens: [RecitationTracker.Token]
         let hints: [String]
         let letters: [Int]
+        let useModel: Bool
     }
 
     private var timings: [String: WordTimings] = [:]
@@ -119,7 +129,8 @@ final class ReciterWordSync {
                          url: RecitationPlayer.shared.audioURL(for: item),
                          tokens: RecognitionForms.tokens(for: [words], edition: store.edition),
                          hints: words.words.map { RecitationText.withoutMarks(text.substring(with: $0.range)) },
-                         letters: words.words.map { max($0.normalized.count, 1) }))
+                         letters: words.words.map { max($0.normalized.count, 1) },
+                         useModel: Self.usesModel(for: store.edition)))
     }
 
     private func pump() {
@@ -128,7 +139,7 @@ final class ReciterWordSync {
         working = job.key
         Task {
             let result = await WordTimingAligner.timings(for: job.url, key: job.key, tokens: job.tokens,
-                                                         hints: job.hints, letters: job.letters)
+                                                         hints: job.hints, letters: job.letters, useModel: job.useModel)
             working = nil
             if let result { timings[job.key] = result } else { unavailable.insert(job.key) }
             pump()
@@ -142,7 +153,7 @@ enum WordTimingAligner {
     static let requiredShare = 0.6
 
     static func timings(for url: URL, key: String, tokens: [RecitationTracker.Token],
-                        hints: [String], letters: [Int]) async -> WordTimings? {
+                        hints: [String], letters: [Int], useModel: Bool) async -> WordTimings? {
         guard !tokens.isEmpty, letters.count == tokens.count else { return nil }
         let cacheFile = cacheURL(for: key)
         if let data = try? Data(contentsOf: cacheFile),
@@ -150,36 +161,57 @@ enum WordTimingAligner {
             return cached
         }
         // Only on the device: the recording is never sent anywhere.
-        guard SFSpeechRecognizer.authorizationStatus() == .authorized,
-              let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "ar-SA")),
-              recognizer.isAvailable, recognizer.supportsOnDeviceRecognition,
-              let download = try? await URLSession.shared.download(from: url) else { return nil }
-        let file = download.0
-        // The recogniser reads audio files by their extension.
+        guard let audio = await download(url) else { return nil }
+        defer { try? FileManager.default.removeItem(at: audio) }
+
+        var placed: (anchors: [Int: Double], duration: Double)?
+        if useModel { placed = await ReciterModelTimings.align(file: audio, tokens: tokens) }
+        if placed.map({ !isUsable($0.anchors, count: tokens.count) }) ?? true {
+            placed = await speechAnchors(audio, tokens: tokens, hints: hints)
+        }
+        guard let placed, isUsable(placed.anchors, count: tokens.count) else { return nil }
+
+        let result = WordTimings(starts: fill(anchors: placed.anchors, count: tokens.count, letters: letters,
+                                              duration: placed.duration),
+                                 anchored: placed.anchors.count)
+        try? FileManager.default.createDirectory(at: cacheFile.deletingLastPathComponent(), withIntermediateDirectories: true)
+        try? JSONEncoder().encode(result).write(to: cacheFile)
+        return result
+    }
+
+    /// Enough words were placed, in order, to follow the ayah word by word.
+    static func isUsable(_ anchors: [Int: Double], count: Int) -> Bool {
+        anchors.count >= 2 && Double(anchors.count) >= Double(count) * requiredShare && isInOrder(anchors)
+    }
+
+    /// Downloads the recording to a temporary file with its extension (audio
+    /// readers go by the extension).
+    private static func download(_ url: URL) async -> URL? {
+        guard let (file, _) = try? await URLSession.shared.download(from: url) else { return nil }
         let audio = file.deletingPathExtension().appendingPathExtension(url.pathExtension.isEmpty ? "mp3" : url.pathExtension)
         do {
             try FileManager.default.moveItem(at: file, to: audio)
+            return audio
         } catch {
             try? FileManager.default.removeItem(at: file)
             return nil
         }
-        defer { try? FileManager.default.removeItem(at: audio) }
+    }
 
+    /// Placed words from Apple's on-device speech recognition (Warsh and
+    /// Qalun, or when the model can't place enough words).
+    private static func speechAnchors(_ audio: URL, tokens: [RecitationTracker.Token],
+                                      hints: [String]) async -> (anchors: [Int: Double], duration: Double)? {
+        guard SFSpeechRecognizer.authorizationStatus() == .authorized,
+              let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "ar-SA")),
+              recognizer.isAvailable, recognizer.supportsOnDeviceRecognition else { return nil }
         let duration = (try? await AVURLAsset(url: audio).load(.duration).seconds) ?? 0
         guard let segments = await recognize(audio, with: recognizer, hints: hints,
                                              timeout: max(30, duration * 3)), !segments.isEmpty else { return nil }
         let end = max(duration, segments.last.map { $0.start + $0.length } ?? 0)
-
         let pairs = RecitationTracker.matchedPairs(tokens: tokens, heard: segments.map(\.text))
         let anchors = Dictionary(pairs.map { ($0.token, segments[$0.heard].start) }, uniquingKeysWith: min)
-        guard anchors.count >= 2, Double(anchors.count) >= Double(tokens.count) * requiredShare,
-              isInOrder(anchors) else { return nil }
-
-        let result = WordTimings(starts: fill(anchors: anchors, count: tokens.count, letters: letters, duration: end),
-                                 anchored: anchors.count)
-        try? FileManager.default.createDirectory(at: cacheFile.deletingLastPathComponent(), withIntermediateDirectories: true)
-        try? JSONEncoder().encode(result).write(to: cacheFile)
-        return result
+        return (anchors, end)
     }
 
     /// Placed words must follow each other in time, or the alignment is wrong.
