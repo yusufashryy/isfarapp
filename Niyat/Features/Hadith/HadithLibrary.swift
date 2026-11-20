@@ -238,7 +238,7 @@ final class HadithLibrary {
 
     enum LoadError: LocalizedError {
         case missing
-        var errorDescription: String? { "The hadiths aren't in the app. Try reinstalling Niyat." }
+        var errorDescription: String? { "The hadiths aren't in the app. Try reinstalling Isfar." }
     }
 
     private(set) var index: HadithIndex?

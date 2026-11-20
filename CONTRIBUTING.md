@@ -1,6 +1,6 @@
-# Contributing to Niyat
+# Contributing to Isfar
 
-JazakAllahu khayran for helping! Niyat is free and always will be.
+JazakAllahu khayran for helping! Isfar is free and always will be.
 
 1. Fork the repo and create a branch.
 2. Follow **Running it** in the README to build (`make`, or `make full` with a paid Apple account).

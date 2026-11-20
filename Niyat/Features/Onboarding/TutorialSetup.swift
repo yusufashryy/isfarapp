@@ -89,7 +89,7 @@ struct TutorialNotificationSetup: View {
                 .foregroundStyle(.black)
                 .controlSize(.large)
                 if allowed == false {
-                    Text("Notifications are off. Turn them on in the Settings app › Notifications › Niyat.")
+                    Text("Notifications are off. Turn them on in the Settings app › Notifications › Isfar.")
                         .font(.footnote)
                         .foregroundStyle(.orange)
                 }

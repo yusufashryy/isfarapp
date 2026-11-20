@@ -31,7 +31,7 @@ final class ShieldConfigurationExtension: ShieldConfigurationDataSource {
 
         var subtitle = "“The prayer is obligatory for believers at specific times.” (Quran 4:103)"
         if let until = FocusStore.lockedUntil {
-            subtitle += "\n\nUnlocks at \(until.shortTime). Prayed already? Open Niyat and tap “I've prayed”."
+            subtitle += "\n\nUnlocks at \(until.shortTime). Prayed already? Open Isfar and tap “I've prayed”."
         }
 
         let background = UIColor(Palette.glow)

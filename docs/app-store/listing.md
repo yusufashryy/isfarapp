@@ -3,7 +3,7 @@
 Copy these into App Store Connect. Character limits are Apple's.
 
 ## Name (30)
-Niyat: Prayer Times & Qur'an
+Isfar: Prayer Times & Qur'an
 
 ## Subtitle (30)
 Salah, Qur'an & Qibla. No ads.
@@ -12,7 +12,7 @@ Salah, Qur'an & Qibla. No ads.
 Free forever: no ads, no accounts, no tracking. Accurate prayer times, a daily Qur'an habit, Qibla and beautiful widgets, on iPhone, iPad and Apple Watch.
 
 ## Description (4000)
-Niyat (نيّة, "intention") helps you keep your prayers and build a daily Qur'an habit. It's free, has no ads, no subscriptions and no accounts, and everything stays on your device.
+Isfar (إسفار, the first light of dawn) helps you keep your prayers and build a daily Qur'an habit. It's free, has no ads, no subscriptions and no accounts, and everything stays on your device.
 
 PRAYER TIMES
 • Accurate times for anywhere, calculated on your phone with your choice of method (Muslim World League, ISNA, Umm al-Qura, Egyptian, Karachi and more) and Hanafi or Standard Asr
@@ -56,7 +56,7 @@ PRIVATE BY DESIGN
 No data is collected. Your location, prayer log and reading progress never leave your phone.
 
 OPEN SOURCE
-Niyat is open source. Every Qur'an source and calculation is documented on GitHub.
+Isfar is open source. Every Qur'an source and calculation is documented on GitHub.
 
 ## Keywords (100, comma-separated, no spaces needed)
 salah,namaz,adhan,azan,quran,koran,qibla,muslim,islam,prayer,mosque,tasbih,hijri,ramadan,dua
@@ -72,21 +72,21 @@ Primary: Lifestyle (or Reference). Secondary: Books.
 - Support URL: https://github.com/yusufashryy/niyatapp/issues
 
 ## App Privacy ("nutrition label")
-Answer **"No, we do not collect data from this app."** Niyat has no server and no analytics. Apple's own services (geocoding, iCloud, In-App Purchase, speech recognition) don't count as the app collecting data: the developer never receives any of it.
+Answer **"No, we do not collect data from this app."** Isfar has no server and no analytics. Apple's own services (geocoding, iCloud, In-App Purchase, speech recognition) don't count as the app collecting data: the developer never receives any of it.
 
-## In-App Purchases (Support Niyat)
+## In-App Purchases (Support Isfar)
 Create three **Consumable** in-app purchases with exactly these Product IDs:
 
 | Product ID | Reference name | Display name | Description | Price |
 |---|---|---|---|---|
 | niyat.tip.small | Small tip | Small tip | A small thank-you | $0.99 |
 | niyat.tip.medium | Kind tip | Kind tip | Helps cover a month of costs | $4.99 |
-| niyat.tip.large | Generous tip | Generous tip | Keeps Niyat free for everyone | $9.99 |
+| niyat.tip.large | Generous tip | Generous tip | Keeps Isfar free for everyone | $9.99 |
 
-Each needs a screenshot of the Support Niyat screen for review. Join the App Store Small Business Program so Apple's fee is 15% rather than 30%.
+Each needs a screenshot of the Support Isfar screen for review. Join the App Store Small Business Program so Apple's fee is 15% rather than 30%.
 
 ## App Review notes
-Niyat is free with no login. Tips are optional and unlock nothing. Location is only used to calculate prayer times and the Qibla. Prayer Lock uses Screen Time (Family Controls) to lock apps the user chooses during prayer times. The microphone and speech recognition are only used after the user taps the microphone in the Qur'an reader, to follow their recitation word by word; audio is never recorded or saved. Speech recognition is also used, on the device only, to line up reciters' recordings with the text.
+Isfar is free with no login. Tips are optional and unlock nothing. Location is only used to calculate prayer times and the Qibla. Prayer Lock uses Screen Time (Family Controls) to lock apps the user chooses during prayer times. The microphone and speech recognition are only used after the user taps the microphone in the Qur'an reader, to follow their recitation word by word; audio is never recorded or saved. Speech recognition is also used, on the device only, to line up reciters' recordings with the text.
 
 ## Screenshots
 iPhone 6.9" (1320 × 2868) and iPad 13" (2064 × 2752). CI's demo tour takes them on the largest iPhone and iPad simulators, so they're already the right sizes: download them from the `demo-media` branch on GitHub (`screenshots/` for iPhone, `screenshots-ipad/` for iPad). Suggested set (up to 10): 03 Today · 06 Quran - Al-Fatiha · 07 Mushaf · 07c Mushaf - memorisation · 08 Qibla · 09 Stats · 09c Year · 11 Tasbih.

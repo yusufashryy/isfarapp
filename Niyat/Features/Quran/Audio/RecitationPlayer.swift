@@ -405,7 +405,7 @@ final class RecitationPlayer {
         var info: [String: Any] = [
             MPMediaItemPropertyTitle: title,
             MPMediaItemPropertyArtist: reciter.name,
-            MPMediaItemPropertyAlbumTitle: "Niyat",
+            MPMediaItemPropertyAlbumTitle: "Isfar",
             MPNowPlayingInfoPropertyPlaybackRate: isPlaying ? 1.0 : 0.0,
         ]
         if let artwork = Self.artwork { info[MPMediaItemPropertyArtwork] = artwork }

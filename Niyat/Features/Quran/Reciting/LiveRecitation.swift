@@ -144,12 +144,12 @@ final class LiveRecitation {
                 SFSpeechRecognizer.requestAuthorization { continuation.resume(returning: $0) }
             }
             guard speech == .authorized else {
-                status = .unavailable("Allow Speech Recognition for Niyat in the Settings app to recite with the app.")
+                status = .unavailable("Allow Speech Recognition for Isfar in the Settings app to recite with the app.")
                 return
             }
         }
         guard await AVAudioApplication.requestRecordPermission() else {
-            status = .unavailable("Allow the Microphone for Niyat in the Settings app to recite with the app.")
+            status = .unavailable("Allow the Microphone for Isfar in the Settings app to recite with the app.")
             return
         }
         // Stopped (or the page closed) while permission was being asked.
@@ -158,7 +158,7 @@ final class LiveRecitation {
             do {
                 try await RecitationModel.shared.load()
             } catch {
-                status = .unavailable("Niyat's recitation model couldn't start. Please restart the app and try again.")
+                status = .unavailable("Isfar's recitation model couldn't start. Please restart the app and try again.")
                 return
             }
             guard status == .starting else { return }

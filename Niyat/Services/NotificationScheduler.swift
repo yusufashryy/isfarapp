@@ -341,7 +341,7 @@ enum NotificationScheduler {
     private static func refreshNudge(at date: Date) -> UNNotificationRequest {
         let content = UNMutableNotificationContent()
         content.title = "Keep your prayer alerts coming"
-        content.body = "Open Niyat so it can schedule the next few days of alerts."
+        content.body = "Open Isfar so it can schedule the next few days of alerts."
         content.sound = .default
         return UNNotificationRequest(identifier: "refresh-nudge", content: content, trigger: trigger(at: date))
     }
@@ -366,10 +366,10 @@ enum NotificationScheduler {
             content.categoryIdentifier = Category.loggablePrayer
             content.userInfo = [UserInfoKey.prayer: current.name.rawValue, UserInfoKey.dayKey: dayKey, UserInfoKey.kind: "prayer"]
         } else if let next {
-            content.title = "Niyat test alert"
+            content.title = "Isfar test alert"
             content.body = "Adhan alerts are working. Next: \(next.name.displayName(on: next.date)) at \(next.date.shortTime)."
         } else {
-            content.title = "Niyat test alert"
+            content.title = "Isfar test alert"
             content.body = "Adhan alerts are working."
         }
         content.sound = sound(for: muezzin)
@@ -391,23 +391,23 @@ enum NotificationScheduler {
         var result: [String] = []
         switch settings.authorizationStatus {
         case .denied:
-            return ["Notifications are turned off for Niyat. Turn on Allow Notifications in the Settings app › Notifications › Niyat."]
+            return ["Notifications are turned off for Isfar. Turn on Allow Notifications in the Settings app › Notifications › Isfar."]
         case .notDetermined:
-            return ["Niyat hasn't been allowed to send notifications yet."]
+            return ["Isfar hasn't been allowed to send notifications yet."]
         default:
             break
         }
         if settings.lockScreenSetting == .disabled {
-            result.append("Lock Screen alerts are off. Turn on Lock Screen in Settings › Notifications › Niyat.")
+            result.append("Lock Screen alerts are off. Turn on Lock Screen in Settings › Notifications › Isfar.")
         }
         if settings.alertSetting == .disabled, settings.notificationCenterSetting == .disabled {
-            result.append("Alerts are hidden. Turn on Banners and Notification Centre in Settings › Notifications › Niyat.")
+            result.append("Alerts are hidden. Turn on Banners and Notification Centre in Settings › Notifications › Isfar.")
         }
         if settings.scheduledDeliverySetting == .enabled {
-            result.append("Niyat is in your Scheduled Summary, so alerts are held back. Set it to Immediate Delivery in Settings › Notifications › Niyat.")
+            result.append("Isfar is in your Scheduled Summary, so alerts are held back. Set it to Immediate Delivery in Settings › Notifications › Isfar.")
         }
         if settings.soundSetting == .disabled {
-            result.append("Sounds are off for Niyat's notifications.")
+            result.append("Sounds are off for Isfar's notifications.")
         }
         return result
     }

@@ -9,7 +9,7 @@ enum WidgetStyleOption: String, AppEnum {
     static let typeDisplayRepresentation: TypeDisplayRepresentation = "Style"
     static let caseDisplayRepresentations: [WidgetStyleOption: DisplayRepresentation] = [
         .minimal: DisplayRepresentation(title: "Minimal", subtitle: "Like Apple's widgets; glass in the Clear look"),
-        .theme: DisplayRepresentation(title: "Niyat theme", subtitle: "Your theme's colours and artwork"),
+        .theme: DisplayRepresentation(title: "Isfar theme", subtitle: "Your theme's colours and artwork"),
     ]
 
     var style: WidgetLook.Style { WidgetLook.Style(rawValue: rawValue) ?? .default }

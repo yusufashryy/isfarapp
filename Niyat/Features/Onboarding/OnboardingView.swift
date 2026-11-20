@@ -39,29 +39,36 @@ struct OnboardingView: View {
                 .fitText()
                 .foregroundStyle(Palette.highlight)
             ZStack {
-                Rosette(color: Palette.highlight.opacity(0.35), lineWidth: 1.2)
-                    .frame(width: 230, height: 230)
+                Rosette(color: Palette.highlight.opacity(0.18), lineWidth: 1)
+                    .frame(width: 250, height: 250)
                     .rotationEffect(.degrees(spin ? 360 : 0))
                     .animation(.linear(duration: 90).repeatForever(autoreverses: false), value: spin)
-                Image(systemName: "moon.stars.fill")
-                    .font(.system(size: 56))
-                    .foregroundStyle(Palette.highlight)
-                    .frame(width: 120, height: 120)
-                    .glassEffect(.regular.tint(Palette.glow.opacity(0.5)), in: .circle)
+                DialMark()
+                    .frame(width: 175, height: 175)
             }
             .onAppear { spin = true }
-            VStack(spacing: 4) {
-                Text("نيّة")
-                    .font(.calligraphy(size: 54))
-                    .foregroundStyle(Palette.highlight)
-                Text("Niyat").font(.display(44, weight: .heavy))
-                Text("intention")
-                    .font(.headline)
-                    .foregroundStyle(Palette.accent)
+            VStack(spacing: 10) {
+                Text("Isfar").font(.display(52, weight: .heavy))
+                // The Arabic name between two hairlines, like a title on a mushaf page.
+                HStack(spacing: 14) {
+                    hairline(leading: true)
+                    Text("إسفار")
+                        .font(.calligraphy(size: 34))
+                        .foregroundStyle(Palette.highlight)
+                        .fixedSize()
+                    hairline(leading: false)
+                }
+                .frame(maxWidth: 260)
+                Text("THE FIRST LIGHT OF DAWN")
+                    .font(.caption.weight(.semibold))
+                    .tracking(2.5)
+                    .foregroundStyle(.white.opacity(0.6))
             }
-            Text("Prayer times, Quran, Qibla and more. Free forever. No ads, no accounts, no tracking.")
+            Text("Prayer times, Qur'an, Qibla and more. Free forever. No ads, no accounts, no tracking.")
+                .font(.callout)
                 .multilineTextAlignment(.center)
-                .foregroundStyle(.white.opacity(0.75))
+                .foregroundStyle(.white.opacity(0.7))
+                .padding(.horizontal, 12)
             primaryButton("Get started") { step = 1 }
                 .haptic(.impact(weight: .medium), trigger: step)
         }
@@ -90,7 +97,7 @@ struct OnboardingView: View {
                     .multilineTextAlignment(.center)
                     .foregroundStyle(.white.opacity(0.75))
             }
-            Text("Niyat can notify you at each adhan. You choose which prayers and when in Settings.")
+            Text("Isfar can notify you at each adhan. You choose which prayers and when in Settings.")
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.white.opacity(0.75))
             // Neutral wording before the permission request (App Review 5.1.1).
@@ -126,6 +133,12 @@ struct OnboardingView: View {
             Button("Skip for now", action: onFinish)
                 .buttonStyle(.glass)
         }
+    }
+
+    private func hairline(leading: Bool) -> some View {
+        LinearGradient(colors: [Palette.highlight.opacity(0), Palette.highlight.opacity(0.6)],
+                       startPoint: leading ? .leading : .trailing, endPoint: leading ? .trailing : .leading)
+            .frame(height: 1)
     }
 
     private func stepIcon(_ name: String) -> some View {

@@ -1,4 +1,4 @@
-# Putting Niyat on the App Store
+# Putting Isfar on the App Store
 
 A step-by-step checklist for the first release. Things only you can do (your
 Apple account, your Mac) are marked **You**. Everything in the code is already
@@ -17,7 +17,7 @@ weeks, App Review usually 1–3 days.
 Prayer Lock uses Screen Time ("Family Controls"). Apps can use it on your own
 phone straight away, but **App Store builds need Apple's approval**.
 1. Request it at <https://developer.apple.com/contact/request/family-controls-distribution>.
-2. Say it's for Niyat's Prayer Lock: the user picks apps to lock during prayer times, on their own device.
+2. Say it's for Isfar's Prayer Lock: the user picks apps to lock during prayer times, on their own device.
 
 If it hasn't come through when everything else is ready, you can ship 1.0
 without Prayer Lock: build with `make project` instead of `make full` (this
@@ -33,8 +33,8 @@ also leaves out Groups, Time Sensitive alerts and the Apple Watch app). Add them
 
 ## 4. Create the app in App Store Connect (**You**)
 1. <https://appstoreconnect.apple.com> › Apps › **+** › New App.
-2. Platform iOS, name **Niyat: Prayer Times & Qur'an**, language English, bundle ID `<your prefix>.Niyat`, SKU `niyat`.
-3. Copy the numeric **Apple ID** from App Information into `Config/Base.xcconfig` › `APP_STORE_ID` (it powers "Rate Niyat"). This one is fine to commit.
+2. Platform iOS, name **Isfar: Prayer Times & Qur'an**, language English, bundle ID `<your prefix>.Niyat`, SKU `niyat`.
+3. Copy the numeric **Apple ID** from App Information into `Config/Base.xcconfig` › `APP_STORE_ID` (it powers "Rate Isfar"). This one is fine to commit.
 
 ## 4a. Initialize and deploy Groups' CloudKit schema
 
@@ -52,7 +52,7 @@ the system record type `cloudkit.share`.
 3. Inspect **Deploy Schema Changes**, verify the changes belong to this app,
    then deploy to Production. Confirm the same types exist in Production.
 4. Test group creation in TestFlight, then invite another iCloud account. Verify
-   acceptance both while Niyat is open and after fully closing it, and confirm
+   acceptance both while Isfar is open and after fully closing it, and confirm
    each member's shared progress updates.
 
 Expected application fields:
@@ -87,7 +87,7 @@ in `project.yml` (1, 2, 3…), then `make full` again.
 ## 6. Fill in the listing (**You**, copying from `listing.md`)
 - Name, subtitle, promotional text, description, keywords, category, age rating (answer "None" to everything → 4+).
 - **Privacy Policy URL**: turn on GitHub Pages first (bottom of `listing.md`).
-- **App Privacy**: "No, we do not collect data". Finding and following a recitation runs on the iPhone (Niyat's bundled model for Hafs).
+- **App Privacy**: "No, we do not collect data". Finding and following a recitation runs on the iPhone (Isfar's bundled model for Hafs).
 - **Screenshots**: 6.9" from the `demo-media` branch (see `listing.md`).
 - **In-App Purchases**: the three tips (table in `listing.md`), and join the Small Business Program for a 15% fee.
 - **App Review notes**: paste the text from `listing.md`.

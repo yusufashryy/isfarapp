@@ -99,7 +99,7 @@ struct SurahListView: View {
             } else {
                 VStack(spacing: 24) {
                     ContentUnavailableView("Choose a surah", systemImage: "book.pages",
-                                           description: Text("It opens here, beside the list. Or recite, and Niyat finds it."))
+                                           description: Text("It opens here, beside the list. Or recite, and Isfar finds it."))
                         .frame(maxHeight: 260)
                     FindByRecitingButton { showFinder = true }
                 }
@@ -448,7 +448,7 @@ private struct FindByRecitingCard: View {
                 .background(Palette.control.gradient, in: .circle)
             VStack(alignment: .leading, spacing: 2) {
                 Text("Recite to find a surah").font(.headline).lineLimit(1).minimumScaleFactor(0.8)
-                Text("Niyat opens it where you are").font(.caption).foregroundStyle(.secondary).lineLimit(1)
+                Text("Isfar opens it where you are").font(.caption).foregroundStyle(.secondary).lineLimit(1)
             }
             Spacer(minLength: 0)
             Image(systemName: "chevron.right").font(.footnote.weight(.bold)).foregroundStyle(.tertiary)
@@ -459,6 +459,6 @@ private struct FindByRecitingCard: View {
         .surface(cornerRadius: 18)
         .accessibilityElement(children: .combine)
         .accessibilityLabel("Find by reciting")
-        .accessibilityHint("Recite a few words and Niyat opens that surah and ayah.")
+        .accessibilityHint("Recite a few words and Isfar opens that surah and ayah.")
     }
 }

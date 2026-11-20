@@ -29,7 +29,7 @@ Arabic dhikr phrases in `Shared/Tasbih.swift` are standard phrases, not copied f
 
 ## Tajweed rules
 
-- **Quran Tajweed** by Collin Fair, [github.com/cpfair/quran-tajweed](https://github.com/cpfair/quran-tajweed), licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Built from ReciteQuran.com and the Dar al-Maarifah tajweed masahif. Niyat re-runs its classifier on the bundled Tanzil text (see docs/SOURCES.md); no rule data was changed by hand.
+- **Quran Tajweed** by Collin Fair, [github.com/cpfair/quran-tajweed](https://github.com/cpfair/quran-tajweed), licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Built from ReciteQuran.com and the Dar al-Maarifah tajweed masahif. Isfar re-runs its classifier on the bundled Tanzil text (see docs/SOURCES.md); no rule data was changed by hand.
 
 ## Recitation model
 

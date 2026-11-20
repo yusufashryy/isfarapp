@@ -16,7 +16,7 @@ enum RecitationHandoff {
     }
 }
 
-/// "Recite and Niyat finds it": listens, names the surah and ayah, then the
+/// "Recite and Isfar finds it": listens, names the surah and ayah, then the
 /// Qur'an list opens it there and keeps following.
 struct FindByRecitingSheet: View {
     let onFound: (VerseReference) -> Void
@@ -121,9 +121,9 @@ struct FindByRecitingSheet: View {
     private var detail: String {
         switch finder.state {
         case .idle where step == .start:
-            "Recite a few words from anywhere in the Qur'an. Niyat finds the surah and ayah, opens it there and follows you."
+            "Recite a few words from anywhere in the Qur'an. Isfar finds the surah and ayah, opens it there and follows you."
         case .idle, .listening:
-            "Recite a few words. Niyat opens the surah as soon as it knows where you are."
+            "Recite a few words. Isfar opens the surah as soon as it knows where you are."
         case .found: "Opening…"
         case .failed(let message): message
         }
@@ -197,6 +197,6 @@ struct FindByRecitingButton: View {
         }
         .buttonStyle(.pressable)
         .accessibilityLabel("Find by reciting")
-        .accessibilityHint("Recite a few words and Niyat opens that surah and ayah.")
+        .accessibilityHint("Recite a few words and Isfar opens that surah and ayah.")
     }
 }

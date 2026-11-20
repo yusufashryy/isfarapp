@@ -82,7 +82,7 @@ struct SupportView: View {
                     .appearAnimation(1)
                 tips
                     .appearAnimation(2)
-                Text("Tips are processed by Apple. Niyat never sees your payment details. After Apple's fee, every tip goes towards running and improving the app.")
+                Text("Tips are processed by Apple. Isfar never sees your payment details. After Apple's fee, every tip goes towards running and improving the app.")
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
@@ -91,7 +91,7 @@ struct SupportView: View {
             .padding(16)
         }
         .niyatBackground()
-        .navigationTitle("Support Niyat")
+        .navigationTitle("Support Isfar")
         .navigationBarTitleDisplayMode(.inline)
         .task { await jar.load() }
         .overlay {
@@ -116,11 +116,11 @@ struct SupportView: View {
             }
             Text("Free forever")
                 .font(.display(28, weight: .heavy))
-            Text("Niyat has no ads, no subscriptions, no accounts and no tracking, and every feature is free for everyone. If it helps you, you can help keep it running.")
+            Text("Isfar has no ads, no subscriptions, no accounts and no tracking, and every feature is free for everyone. If it helps you, you can help keep it running.")
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.white.opacity(0.75))
             if tipCount > 0 {
-                Label("You've supported Niyat. Jazak Allahu khayran!", systemImage: "sparkles")
+                Label("You've supported Isfar. Jazak Allahu khayran!", systemImage: "sparkles")
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(Palette.highlight)
             }

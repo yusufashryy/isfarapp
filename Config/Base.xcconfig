@@ -14,7 +14,7 @@ APP_GROUP_ID = group.$(BUNDLE_ID_PREFIX).niyat
 DEVELOPMENT_TEAM =
 
 // After the app is on the App Store: its numeric Apple ID (App Store Connect ›
-// App Information), used by More › Rate Niyat. Leave empty until then.
+// App Information), used by More › Rate Isfar. Leave empty until then.
 APP_STORE_ID = 6816590077
 
 // Where More › Send feedback emails go. Empty = open a GitHub issue instead.

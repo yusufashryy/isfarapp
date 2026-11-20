@@ -120,7 +120,7 @@ struct WatchRootView: View {
                 VStack(spacing: 8) {
                     Image(systemName: "iphone")
                         .font(.title2)
-                    Text("Open Niyat on your iPhone to set your location.")
+                    Text("Open Isfar on your iPhone to set your location.")
                         .font(.footnote)
                         .multilineTextAlignment(.center)
                 }

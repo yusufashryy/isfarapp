@@ -173,7 +173,7 @@ struct MushafPageView: View {
             ReciteIntroSheet(edition: store.edition) { startListening() }
                 .preferredColorScheme(.dark)
         }
-        .alert("Recite with Niyat", isPresented: unavailableBinding) {
+        .alert("Recite with Isfar", isPresented: unavailableBinding) {
             Button("OK", role: .cancel) { live.acknowledge() }
         } message: {
             if case .unavailable(let message) = live.status { Text(message) }

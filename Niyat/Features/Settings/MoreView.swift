@@ -26,7 +26,7 @@ struct MoreView: View {
 
                     VStack(spacing: 0) {
                         Button { showTutorial = true } label: {
-                            rowLabel("How to use Niyat", systemImage: "questionmark.circle.fill")
+                            rowLabel("How to use Isfar", systemImage: "questionmark.circle.fill")
                         }
                         .buttonStyle(.pressable)
                         Divider().overlay(Palette.hairline).padding(.leading, 56)
@@ -44,7 +44,7 @@ struct MoreView: View {
                     VStack(spacing: 0) {
                         // Always shown, so App Review can find the tips. If they
                         // can't load, the page says so instead of listing them.
-                        row("Support Niyat", systemImage: "heart.fill") { SupportView() }
+                        row("Support Isfar", systemImage: "heart.fill") { SupportView() }
                         Divider().overlay(Palette.hairline).padding(.leading, 56)
                         row("Send feedback", systemImage: "envelope.fill") { FeedbackView() }
                         Divider().overlay(Palette.hairline).padding(.leading, 56)
@@ -55,7 +55,7 @@ struct MoreView: View {
                                 requestReview()
                             }
                         } label: {
-                            rowLabel("Rate Niyat", systemImage: "star.fill")
+                            rowLabel("Rate Isfar", systemImage: "star.fill")
                         }
                         .buttonStyle(.pressable)
                     }
@@ -63,12 +63,16 @@ struct MoreView: View {
                     .appearAnimation(2)
 
                     VStack(spacing: 10) {
-                        Text("إِنَّمَا ٱلْأَعْمَالُ بِٱلنِّيَّاتِ")
-                            .font(.calligraphy(size: 30))
+                        // Al-Muddaththir 74:34, where the name Isfar comes from (verified text and translation).
+                        Text("وَٱلصُّبْحِ إِذَآ أَسْفَرَ")
+                            .font(.quran(size: 30))
                             .foregroundStyle(Palette.highlight)
-                        Text("“Actions are judged by their intentions.”")
+                        Text("“And the morning as it lights up.”")
                             .font(.footnote)
                             .foregroundStyle(.secondary)
+                        Text("Al-Muddaththir 74:34 · The Clear Quran")
+                            .font(.caption2)
+                            .foregroundStyle(.tertiary)
                         OrnamentDivider()
                             .frame(width: 160)
                     }
@@ -144,7 +148,7 @@ private struct WidgetGuideView: View {
                 guide(title: "Home Screen", steps: [
                     "Touch and hold an empty spot on your Home Screen until the apps jiggle.",
                     "Tap Edit, then Add Widget.",
-                    "Search for Niyat and pick a widget: Next Prayer, Prayer Times, Verse of the Day or Tasbih.",
+                    "Search for Isfar and pick a widget: Next Prayer, Prayer Times, Verse of the Day or Tasbih.",
                 ])
                 guide(title: "Lock Screen", steps: [
                     "Touch and hold your Lock Screen, then tap Customize › Lock Screen.",
@@ -183,12 +187,18 @@ struct AboutView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 14) {
                 VStack(alignment: .leading, spacing: 10) {
-                    HStack(alignment: .firstTextBaseline) {
-                        Text("Niyat").font(.display(34, weight: .heavy))
+                    HStack(spacing: 14) {
+                        DialMark().frame(width: 60, height: 60)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Isfar").font(.display(34, weight: .heavy))
+                            Text("THE FIRST LIGHT OF DAWN")
+                                .font(.caption2.weight(.semibold))
+                                .tracking(2)
+                                .foregroundStyle(.secondary)
+                        }
                         Spacer()
-                        Text("نيّة").font(.calligraphy(size: 40)).foregroundStyle(Palette.highlight)
+                        Text("إسفار").font(.calligraphy(size: 36)).foregroundStyle(Palette.highlight)
                     }
-                    Text("intention").font(.headline).foregroundStyle(Palette.accent)
                     Text("A free, open-source companion for your deen. No ads, no subscriptions, no accounts and no tracking. Everything runs on your phone.")
                         .foregroundStyle(.secondary)
                     Link(destination: URL(string: "https://github.com/yusufashryy/niyatapp")!) {

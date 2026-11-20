@@ -46,7 +46,7 @@ targets:
     info:
       path: PrayerLock/Monitor/Support/Info.plist
       properties:
-        CFBundleDisplayName: Niyat Prayer Lock
+        CFBundleDisplayName: Isfar Prayer Lock
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         NSExtension:
@@ -76,7 +76,7 @@ targets:
     info:
       path: PrayerLock/Shield/Support/Info.plist
       properties:
-        CFBundleDisplayName: Niyat Prayer Shield
+        CFBundleDisplayName: Isfar Prayer Shield
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         NSExtension:
@@ -114,7 +114,7 @@ targets:
     info:
       path: Watch/App/Support/Info.plist
       properties:
-        CFBundleDisplayName: Niyat
+        CFBundleDisplayName: Isfar
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         UIAppFonts: [AmiriQuran-Regular.ttf, ArefRuqaa-Bold.ttf, DigitalKhattOldMadina.otf]
@@ -152,7 +152,7 @@ targets:
     info:
       path: Watch/Widgets/Support/Info.plist
       properties:
-        CFBundleDisplayName: Niyat Complications
+        CFBundleDisplayName: Isfar Complications
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         UIAppFonts: [AmiriQuran-Regular.ttf, ArefRuqaa-Bold.ttf, DigitalKhattOldMadina.otf]

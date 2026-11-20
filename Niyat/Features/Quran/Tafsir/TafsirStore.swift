@@ -120,7 +120,7 @@ final class TafsirStore {
 
     enum LoadError: LocalizedError {
         case missing(TafsirBook)
-        var errorDescription: String? { "This tafsir isn't in the app. Try reinstalling Niyat." }
+        var errorDescription: String? { "This tafsir isn't in the app. Try reinstalling Isfar." }
     }
 
     private var loaded: [TafsirBook: TafsirIndex] = [:]

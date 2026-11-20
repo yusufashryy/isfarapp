@@ -25,7 +25,7 @@ struct FocusView: View {
                                 Task { await requestAuthorization() }
                             }
                         } footer: {
-                            Text("Niyat needs Screen Time permission to lock apps. Nothing leaves your device. Apple doesn't even tell Niyat which apps you pick.")
+                            Text("Isfar needs Screen Time permission to lock apps. Nothing leaves your device. Apple doesn't even tell Isfar which apps you pick.")
                         }
                     } else {
                         if FocusScheduler.isLocked, let until = FocusStore.lockedUntil, until > context.date {
@@ -106,7 +106,7 @@ struct FocusView: View {
         } header: {
             Text("At prayer time")
         } footer: {
-            Text("When the adhan time comes, the apps you choose are locked for \(settings.minutes) minutes. Apple requires at least 15. Open Niyat and tap “I've prayed” to unlock early.")
+            Text("When the adhan time comes, the apps you choose are locked for \(settings.minutes) minutes. Apple requires at least 15. Open Isfar and tap “I've prayed” to unlock early.")
         }
     }
 

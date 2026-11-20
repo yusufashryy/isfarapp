@@ -43,7 +43,7 @@ struct QuranSettingsView: View {
                         Label("Qur'an notifications", systemImage: "bell.badge")
                     }
                 } footer: {
-                    Text("Mushaf pages follow the 604 pages of the Madinah mushaf (Hafs), line for line: every page has the same 15 lines as the printed copy, drawn from Niyat's verified text.")
+                    Text("Mushaf pages follow the 604 pages of the Madinah mushaf (Hafs), line for line: every page has the same 15 lines as the printed copy, drawn from Isfar's verified text.")
                 }
 
                 Section {
@@ -187,9 +187,9 @@ struct QuranSettingsView: View {
             return what + " This iPhone can't recognise Arabic speech on the device, so the whole ayah is highlighted instead."
         }
         if speechStatus == .denied || speechStatus == .restricted {
-            return what + " Allow Speech Recognition for Niyat in the Settings app to use it."
+            return what + " Allow Speech Recognition for Isfar in the Settings app to use it."
         }
-        return what + " The recitations don't come with word timings, so Niyat lines each ayah's audio up with the text on your iPhone, with Apple's speech recognition. Ayat it can't line up confidently are highlighted as a whole. Nothing leaves your iPhone."
+        return what + " The recitations don't come with word timings, so Isfar lines each ayah's audio up with the text on your iPhone, with Apple's speech recognition. Ayat it can't line up confidently are highlighted as a whole. Nothing leaves your iPhone."
     }
 
     private func select(_ edition: QuranEdition) {

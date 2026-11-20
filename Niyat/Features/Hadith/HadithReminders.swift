@@ -96,7 +96,7 @@ struct HadithNotificationSection: View {
                 DatePicker("Time", selection: time, displayedComponents: .hourAndMinute)
             }
             if !authorized {
-                Label("Notifications are off for Niyat. Turn them on in the Settings app › Notifications › Niyat.",
+                Label("Notifications are off for Isfar. Turn them on in the Settings app › Notifications › Isfar.",
                       systemImage: "exclamationmark.triangle.fill")
                     .font(.footnote)
                     .foregroundStyle(.orange)
@@ -159,7 +159,7 @@ struct HadithNotificationSheet: View {
             .surface(cornerRadius: 20)
 
             if !authorized {
-                Label("Notifications are off for Niyat. Turn them on in the Settings app › Notifications › Niyat.",
+                Label("Notifications are off for Isfar. Turn them on in the Settings app › Notifications › Isfar.",
                       systemImage: "exclamationmark.triangle.fill")
                     .font(.footnote)
                     .foregroundStyle(.orange)
