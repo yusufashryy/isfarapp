@@ -27,7 +27,7 @@ struct QuranNotificationsView: View {
                     Task { authorized = await NotificationScheduler.requestAuthorization() }
                 }
                 if !authorized {
-                    Label("Notifications are off for Niyat. Turn them on in the Settings app › Notifications › Niyat.",
+                    Label("Notifications are off for Isfar. Turn them on in the Settings app › Notifications › Isfar.",
                           systemImage: "exclamationmark.triangle.fill")
                         .font(.footnote)
                         .foregroundStyle(.orange)

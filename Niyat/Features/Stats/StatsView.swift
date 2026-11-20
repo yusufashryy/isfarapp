@@ -180,7 +180,7 @@ struct RewardMethodSheet: View {
                     Link("Read it on Sunnah.com (Jami' at-Tirmidhi 2910)",
                          destination: URL(string: "https://sunnah.com/tirmidhi:2910")!)
 
-                    Text("How Niyat estimates it")
+                    Text("How Isfar estimates it")
                         .font(.headline)
                         .padding(.top, 6)
                     VStack(alignment: .leading, spacing: 8) {

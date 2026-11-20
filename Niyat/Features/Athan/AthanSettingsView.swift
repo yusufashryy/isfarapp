@@ -31,7 +31,7 @@ struct AthanSettingsView: View {
             Section {
                 Toggle("Play the full athan", isOn: $settings.playsFullAthan)
             } footer: {
-                Text("When you open the alert, or Niyat is open when it comes, the whole athan plays, with a Stop button. It streams, so it needs internet; without it, the opening plays instead.")
+                Text("When you open the alert, or Isfar is open when it comes, the whole athan plays, with a Stop button. It streams, so it needs internet; without it, the opening plays instead.")
             }
 
             Section {
@@ -58,9 +58,9 @@ struct AthanSettingsView: View {
                     }
                 }
             } header: {
-                Text("Without opening Niyat")
+                Text("Without opening Isfar")
             } footer: {
-                Text("iOS cuts every alert sound at 30 seconds. With this on, Niyat downloads the athan once, cuts it at the muezzin's pauses, and sends the parts one after another, so the whole athan plays from the alert. Swipe the alert away, open it or log the prayer to stop it. It covers the next \(AthanSegments.prayersAhead) prayers at a time (each uses several of the alerts iOS allows), so open Niyat once a day to keep it going. There may be a brief gap between parts.")
+                Text("iOS cuts every alert sound at 30 seconds. With this on, Isfar downloads the athan once, cuts it at the muezzin's pauses, and sends the parts one after another, so the whole athan plays from the alert. Swipe the alert away, open it or log the prayer to stop it. It covers the next \(AthanSegments.prayersAhead) prayers at a time (each uses several of the alerts iOS allows), so open Isfar once a day to keep it going. There may be a brief gap between parts.")
             }
 
             Section {

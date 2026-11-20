@@ -138,8 +138,8 @@ struct QuranShareCard: View {
         switch content.kind {
         case .quran:
             showsTranslation && !content.translation.isEmpty
-                ? "Translation: The Clear Quran · Shared from Niyat" : "Shared from Niyat"
-        case .hadith: "Hadith: HadeethEnc.com · Shared from Niyat"
+                ? "Translation: The Clear Quran · Shared from Isfar" : "Shared from Isfar"
+        case .hadith: "Hadith: HadeethEnc.com · Shared from Isfar"
         }
     }
 
@@ -175,7 +175,7 @@ struct QuranShareImage: Transferable {
 
     static var transferRepresentation: some TransferRepresentation {
         DataRepresentation(exportedContentType: .png) { $0.png }
-            .suggestedFileName("Niyat.png")
+            .suggestedFileName("Isfar.png")
     }
 
     /// Draws the card at three times its size. Nil if it couldn't be drawn.

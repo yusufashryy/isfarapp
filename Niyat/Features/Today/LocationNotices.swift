@@ -51,7 +51,7 @@ struct TimeZoneChangedCard: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text("Update prayer times?")
                     .font(.headline)
-                Text("Your device's clock is on a different time zone from \(location.name). If you've travelled, Niyat can show times for where you are now.")
+                Text("Your device's clock is on a different time zone from \(location.name). If you've travelled, Isfar can show times for where you are now.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }

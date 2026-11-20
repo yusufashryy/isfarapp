@@ -17,8 +17,8 @@ configFiles:
 settings:
   base:
     SWIFT_VERSION: "5.0"
-    MARKETING_VERSION: "2.2.1"
-    CURRENT_PROJECT_VERSION: "21"
+    MARKETING_VERSION: "2.3.0"
+    CURRENT_PROJECT_VERSION: "22"
     # iPhone and iPad.
     TARGETED_DEVICE_FAMILY: "1,2"
     # Xcode's recommended settings.
@@ -60,7 +60,7 @@ targets:
     info:
       path: Niyat/Support/Info.plist
       properties:
-        CFBundleDisplayName: Niyat
+        CFBundleDisplayName: Isfar
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         UILaunchScreen:
@@ -75,9 +75,9 @@ targets:
         UIAppFonts: [AmiriQuran-Regular.ttf, ArefRuqaa-Bold.ttf, DigitalKhattOldMadina.otf]
         UIBackgroundModes: [fetch, audio]
         BGTaskSchedulerPermittedIdentifiers: [$(PRODUCT_BUNDLE_IDENTIFIER).refresh]
-        NSMicrophoneUsageDescription: Niyat listens while you recite to find the surah and follow your place. Your recitation stays on your iPhone and is never recorded or saved.
-        NSSpeechRecognitionUsageDescription: Niyat uses Apple's speech recognition to follow your recitation word by word, and to line up reciters' recordings with the text. When your iPhone supports it, this happens entirely on the device.
-        NSLocationWhenInUseUsageDescription: Niyat uses your location to calculate accurate prayer times and the Qibla direction. Your location never leaves your phone.
+        NSMicrophoneUsageDescription: Isfar listens while you recite to find the surah and follow your place. Your recitation stays on your iPhone and is never recorded or saved.
+        NSSpeechRecognitionUsageDescription: Isfar uses Apple's speech recognition to follow your recitation word by word, and to line up reciters' recordings with the text. When your iPhone supports it, this happens entirely on the device.
+        NSLocationWhenInUseUsageDescription: Isfar uses your location to calculate accurate prayer times and the Qibla direction. Your location never leaves your phone.
         ITSAppUsesNonExemptEncryption: false
         CKSharingSupported: true
         CFBundleURLTypes:
@@ -153,7 +153,7 @@ targets:
     info:
       path: NiyatWidgets/Support/Info.plist
       properties:
-        CFBundleDisplayName: Niyat Widgets
+        CFBundleDisplayName: Isfar Widgets
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         UIAppFonts: [AmiriQuran-Regular.ttf, ArefRuqaa-Bold.ttf, DigitalKhattOldMadina.otf]

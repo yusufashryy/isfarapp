@@ -150,11 +150,11 @@ struct MainTabView: View {
                 requestReview()
             }
         }
-        .alert("How's Niyat working for you?", isPresented: $prompter.offerFeedback) {
+        .alert("How's Isfar working for you?", isPresented: $prompter.offerFeedback) {
             Button("Send feedback") { showFeedback = true }
             Button("Not now", role: .cancel) {}
         } message: {
-            Text("Niyat is built by one person. Ideas, bugs, or anything that looks inaccurate: we read every message.")
+            Text("Isfar is built by one person. Ideas, bugs, or anything that looks inaccurate: we read every message.")
         }
         .sheet(isPresented: $showFeedback) {
             NavigationStack {

@@ -36,7 +36,7 @@ struct ReciteButton: View {
         .accessibilityLabel(live.isListening ? "Stop reciting" : "Recite")
         .accessibilityValue(stateDescription)
         .accessibilityHint(live.isListening ? "Stops listening. Marked words stay for you to review."
-                                            : "Niyat follows you word by word as you recite.")
+                                            : "Isfar follows you word by word as you recite.")
         .accessibilityIdentifier("reciteButton")
         .animation(reduceMotion ? nil : .smooth, value: live.status)
     }

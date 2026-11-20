@@ -114,7 +114,7 @@ struct FeedbackView: View {
 
     private var placeholder: String {
         switch kind {
-        case .idea: "What would make Niyat better for you?"
+        case .idea: "What would make Isfar better for you?"
         case .bug: "What happened, and what did you expect?"
         case .accuracy: "What looks wrong, and where are you?"
         case .other: "Tell us anything"
@@ -126,7 +126,7 @@ struct FeedbackView: View {
         return value?.contains("@") == true ? value : nil
     }
 
-    private var subject: String { "Niyat feedback: \(kind.rawValue)" }
+    private var subject: String { "Isfar feedback: \(kind.rawValue)" }
 
     private var details: String {
         let info = Bundle.main.infoDictionary
@@ -211,7 +211,7 @@ enum FeedbackSender {
         if !reply.isEmpty { fields.append(["name": "Reply to", "value": String(reply.prefix(200)), "inline": true]) }
         if let details { fields.append(["name": "Details", "value": String(details.prefix(1000))]) }
         let payload: [String: Any] = [
-            "username": "Niyat Feedback",
+            "username": "Isfar Feedback",
             "allowed_mentions": ["parse": [String]()],
             "embeds": [[
                 "title": kind,

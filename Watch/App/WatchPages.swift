@@ -248,7 +248,7 @@ struct WatchQuranPage: View {
                 Image(systemName: "book.closed")
                     .font(.title2)
                     .foregroundStyle(Palette.highlight)
-                Text("Set a daily Qur'an goal in Niyat on your iPhone.")
+                Text("Set a daily Qur'an goal in Isfar on your iPhone.")
                     .font(.footnote)
                     .multilineTextAlignment(.center)
             }

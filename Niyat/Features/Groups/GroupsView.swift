@@ -160,7 +160,7 @@ struct GroupsView: View {
                 .onSubmit { sync.publishSoon() }
             Toggle("Prayers (how many of 5 today, streak)", isOn: Binding(get: { sync.sharePrayers }, set: { sync.sharePrayers = $0 }))
             Toggle("Qur'an (ayat today and this week, goal, streak)", isOn: Binding(get: { sync.shareQuran }, set: { sync.shareQuran = $0 }))
-            Text("Only totals are shared, never which prayer, reasons or notes. Everything travels through iCloud sharing; Niyat has no servers.")
+            Text("Only totals are shared, never which prayer, reasons or notes. Everything travels through iCloud sharing; Isfar has no servers.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }

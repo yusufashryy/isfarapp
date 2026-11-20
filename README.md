@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/images/banner.png" alt="Niyat: prayer times, Qur'an and Qibla for iPhone. Free forever, no ads, no tracking.">
+  <img src="docs/images/banner.png" alt="Isfar: prayer times, Qur'an and Qibla for iPhone. Free forever, no ads, no tracking.">
 </p>
 
 <p align="center">
@@ -19,7 +19,7 @@
   <img src="docs/screenshots/year.png" width="180" alt="Year view">
 </p>
 
-*Niyat* means **intention**. The app helps you keep your prayers and read the Qur'an every day.
+*Isfar* (إسفار) is **the first light of dawn**, from "By the morning as it lights up" (74:34). The app helps you keep your prayers and read the Qur'an every day.
 
 ## What it does
 
@@ -67,7 +67,7 @@ Every source is listed in [docs/SOURCES.md](docs/SOURCES.md).
 
 ## Privacy
 
-Everything stays on your iPhone or iPad. There is no Niyat server and nothing is collected. Read the [privacy policy](docs/privacy.md).
+Everything stays on your iPhone or iPad. There is no Isfar server and nothing is collected. Read the [privacy policy](docs/privacy.md).
 
 ## Put it on your iPhone or iPad
 
@@ -91,7 +91,7 @@ With a free Apple ID the app works for 7 days, then press Run again. With a paid
 
 ## Support
 
-Niyat is free and always will be. If it helps you, you can leave an optional tip in the app (More › Support Niyat) to help cover the cost of being on the App Store.
+Isfar is free and always will be. If it helps you, you can leave an optional tip in the app (More › Support Isfar) to help cover the cost of being on the App Store.
 
 Found a bug or have an idea? Use **More › Send feedback** in the app, or [open an issue](https://github.com/yusufashryy/niyatapp/issues).
 

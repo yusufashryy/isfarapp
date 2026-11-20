@@ -127,6 +127,52 @@ struct Rosette: View {
     }
 }
 
+/// The Isfar logo, the same art as the app icon: the prayer dial with a point
+/// for each of the five prayers (the second one glowing) around the star.
+struct DialMark: View {
+    var color: Color = Palette.highlight
+
+    /// Roughly Fajr, Dhuhr, Asr, Maghrib and Isha around a 24-hour dial (noon at the top).
+    private static let prayers: [CGFloat] = [0.22, 0.53, 0.66, 0.78, 0.86]
+
+    var body: some View {
+        Canvas { context, size in
+            let side = min(size.width, size.height)
+            let centre = CGPoint(x: size.width / 2, y: size.height / 2)
+            let ringRadius = side * 0.38
+            let lineWidth = side * 0.014
+            func point(_ fraction: CGFloat) -> CGPoint {
+                let angle = fraction * 2 * .pi + .pi / 2
+                return CGPoint(x: centre.x + ringRadius * cos(angle), y: centre.y + ringRadius * sin(angle))
+            }
+
+            let glowAt = point(Self.prayers[1])
+            // A soft light around the next prayer. A gradient that fades to nothing inside
+            // the frame, so it never gets cut off at the edge the way a blur would.
+            let glowRadius = side * 0.115
+            context.fill(Path(ellipseIn: CGRect(x: glowAt.x - glowRadius, y: glowAt.y - glowRadius,
+                                                width: glowRadius * 2, height: glowRadius * 2)),
+                         with: .radialGradient(Gradient(colors: [color.opacity(0.55), color.opacity(0)]),
+                                               center: glowAt, startRadius: 0, endRadius: glowRadius))
+
+            var lines = Path(ellipseIn: CGRect(x: centre.x - ringRadius, y: centre.y - ringRadius,
+                                               width: ringRadius * 2, height: ringRadius * 2))
+            lines.addPath(EightPointStar.path(center: centre, radius: side * 0.215))
+            context.stroke(lines, with: .color(color), style: StrokeStyle(lineWidth: lineWidth, lineJoin: .round))
+
+            var solid = EightPointStar.path(center: centre, radius: side * 0.095, rotation: .pi / 8)
+            for (index, fraction) in Self.prayers.enumerated() {
+                let p = point(fraction)
+                let r = side * (index == 1 ? 0.034 : 0.022)
+                solid.addEllipse(in: CGRect(x: p.x - r, y: p.y - r, width: r * 2, height: r * 2))
+            }
+            context.fill(solid, with: .color(color))
+        }
+        .aspectRatio(1, contentMode: .fit)
+        .accessibilityHidden(true)
+    }
+}
+
 /// A thin divider with a small star in the middle.
 struct OrnamentDivider: View {
     var color: Color = Palette.highlight

@@ -79,15 +79,15 @@ struct ReciteIntroSheet: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
                     point("text.word.spacing", "Follows you word by word",
-                          "Recite from anywhere. Niyat finds your place, lights up the word you're on and turns the pages with you. Start another surah and it goes there.")
+                          "Recite from anywhere. Isfar finds your place, lights up the word you're on and turns the pages with you. Start another surah and it goes there.")
                     point("eye.slash", "Recite from memory",
                           "Hide the text with the eye button. The words show again as you recite them.")
                     point("lock.shield", "Private",
                           usesModel
-                              ? "Your recitation is followed by Niyat's own recitation model, on this iPhone. Nothing is recorded, saved or sent anywhere."
-                              : "Your recitation is followed by Apple's speech recognition (on this iPhone when it supports Arabic, otherwise on Apple's servers, encrypted as with dictation). Niyat never records or saves it.")
+                              ? "Your recitation is followed by Isfar's own recitation model, on this iPhone. Nothing is recorded, saved or sent anywhere."
+                              : "Your recitation is followed by Apple's speech recognition (on this iPhone when it supports Arabic, otherwise on Apple's servers, encrypted as with dictation). Isfar never records or saves it.")
                     point("person.2", "Not a teacher",
-                          "Niyat finds and follows your place; it doesn't judge your recitation. For pronunciation and tajweed, recite to a qualified teacher.")
+                          "Isfar finds and follows your place; it doesn't judge your recitation. For pronunciation and tajweed, recite to a qualified teacher.")
                 }
                 .padding(20)
                 .readableWidth()
@@ -107,7 +107,7 @@ struct ReciteIntroSheet: View {
                 .background { BottomFade() }
             }
             .niyatBackground()
-            .navigationTitle("Recite with Niyat")
+            .navigationTitle("Recite with Isfar")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } } }
         }

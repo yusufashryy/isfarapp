@@ -11,8 +11,8 @@ struct TutorialView: View {
 
     private var pages: [TutorialPage] {
         [
-            TutorialPage(icon: "hand.wave.fill", title: "Welcome to Niyat",
-                         subtitle: "A one-minute tour. Swipe to go through it, or skip and come back any time from More › How to use Niyat.",
+            TutorialPage(icon: "hand.wave.fill", title: "Welcome to Isfar",
+                         subtitle: "A one-minute tour. Swipe to go through it, or skip and come back any time from More › How to use Isfar.",
                          points: []),
             TutorialPage(icon: "clock.fill", title: "Prayer times",
                          subtitle: "Times are calculated on your phone for where you are. If they don't match your local mosque, change the method here or later in Settings.",
@@ -27,10 +27,10 @@ struct TutorialView: View {
                              TutorialPoint("bell.fill", "The bell on each row turns that prayer's alerts on or off."),
                          ]),
             TutorialPage(icon: "bell.badge.fill", title: "Prayer notifications",
-                         subtitle: "Niyat can remind you before, at, and after each prayer.",
+                         subtitle: "Isfar can remind you before, at, and after each prayer.",
                          points: [
                              TutorialPoint("hand.point.up.left.fill", "Press and hold a prayer alert, then tap Log Prayer. It's logged without opening the app, and never counted twice."),
-                             TutorialPoint("arrow.clockwise", "iOS only lets apps queue so many alerts, so open Niyat every couple of days to keep them coming."),
+                             TutorialPoint("arrow.clockwise", "iOS only lets apps queue so many alerts, so open Isfar every couple of days to keep them coming."),
                              TutorialPoint("gearshape.fill", "Set it up below. You can change it any time in More › Settings."),
                          ],
                          action: .notifications),
@@ -39,7 +39,7 @@ struct TutorialView: View {
                          points: [
                              TutorialPoint("target", "Set a daily goal in ayat, then tap Read: one ayah at a time, with its juz, page, recitation and tafsir. An ayah counts when you tap Next, or hear it to the end. It keeps its own place; the pencil searches for where to read."),
                              TutorialPoint("speaker.wave.2.fill", "Tap the speaker on any verse to hear it, or play to recite on. The text follows the reciter word by word."),
-                             TutorialPoint("mic.fill", "Tap the mic and recite: Niyat follows you word by word and marks words to double-check. The eye next to it hides the text so you can recite from memory."),
+                             TutorialPoint("mic.fill", "Tap the mic and recite: Isfar follows you word by word and marks words to double-check. The eye next to it hides the text so you can recite from memory."),
                              TutorialPoint("book.pages.fill", "The book icon opens the mushaf: the 604 pages of the Madinah mushaf, line for line. Swipe right-to-left like a printed copy."),
                              TutorialPoint("bell.badge.fill", "The bell sets Qur'an reminders: morning, afternoon, streak, verse of the day and Surah Al-Kahf on Fridays."),
                          ],
@@ -68,9 +68,9 @@ struct TutorialView: View {
             TutorialPage(icon: "square.grid.2x2.fill", title: "Widgets",
                          subtitle: "Keep it on your Home and Lock Screen.",
                          points: [
-                             TutorialPoint("hand.tap.fill", "Touch and hold an empty spot on your Home Screen, tap Edit › Add Widget, and search for Niyat."),
+                             TutorialPoint("hand.tap.fill", "Touch and hold an empty spot on your Home Screen, tap Edit › Add Widget, and search for Isfar."),
                              TutorialPoint("checkmark.circle.fill", "The Prayer Log widget lets you check in right from the Home Screen."),
-                             TutorialPoint("lock.fill", "On the Lock Screen, touch and hold, tap Customize, then add a Niyat widget under the clock."),
+                             TutorialPoint("lock.fill", "On the Lock Screen, touch and hold, tap Customize, then add a Isfar widget under the clock."),
                          ]),
             TutorialPage(icon: "paintpalette.fill", title: "Make it yours",
                          subtitle: "Everything else lives in More.",
@@ -78,7 +78,7 @@ struct TutorialView: View {
                              TutorialPoint("swatchpalette.fill", "Themes: Onyx, Midnight, Emerald and more, or build your own colours."),
                              TutorialPoint("circle.hexagongrid.fill", "Tasbih: a counter for your dhikr."),
                              TutorialPoint("gearshape.fill", "Settings: calculation method, Asr time, haptics, and erase all data."),
-                             TutorialPoint("heart.fill", "Support Niyat and Send feedback: optional tips, and a direct line for ideas or anything that looks wrong."),
+                             TutorialPoint("heart.fill", "Support Isfar and Send feedback: optional tips, and a direct line for ideas or anything that looks wrong."),
                          ],
                          action: .style),
         ]
@@ -129,7 +129,7 @@ struct TutorialView: View {
                         finish()
                     }
                 } label: {
-                    Text(page < pages.count - 1 ? "Next" : "Start using Niyat")
+                    Text(page < pages.count - 1 ? "Next" : "Start using Isfar")
                         .font(.headline)
                         .foregroundStyle(.black)
                         .frame(maxWidth: .infinity)

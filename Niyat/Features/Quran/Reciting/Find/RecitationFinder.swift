@@ -43,14 +43,14 @@ final class RecitationFinder {
         let edition = QuranStore.shared.edition
         usesModel = LiveRecitation.modelAvailable(for: edition)
         guard await AVAudioApplication.requestRecordPermission() else {
-            state = .failed("Allow the Microphone for Niyat in the Settings app to find a surah by reciting.")
+            state = .failed("Allow the Microphone for Isfar in the Settings app to find a surah by reciting.")
             return
         }
         if usesModel {
             do {
                 try await RecitationModel.shared.load()
             } catch {
-                state = .failed("Niyat's recitation model couldn't start. Please restart the app and try again.")
+                state = .failed("Isfar's recitation model couldn't start. Please restart the app and try again.")
                 return
             }
         } else {
@@ -187,7 +187,7 @@ final class RecitationFinder {
             SFSpeechRecognizer.requestAuthorization { continuation.resume(returning: $0) }
         }
         guard status == .authorized else {
-            state = .failed("Allow Speech Recognition for Niyat in the Settings app to find a surah by reciting.")
+            state = .failed("Allow Speech Recognition for Isfar in the Settings app to find a surah by reciting.")
             return false
         }
         let request = SFSpeechAudioBufferRecognitionRequest()

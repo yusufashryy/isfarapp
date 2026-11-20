@@ -110,11 +110,11 @@ struct SettingsView: View {
                                                                         next: model.nextPrayer(after: .now))
                         let problems = await NotificationScheduler.problems()
                         if !sent {
-                            testMessage = problems.first ?? "Notifications are off. Turn them on in the iPhone Settings app › Notifications › Niyat."
+                            testMessage = problems.first ?? "Notifications are off. Turn them on in the iPhone Settings app › Notifications › Isfar."
                         } else {
                             testMessage = "Sent! It arrives in \(Int(NotificationScheduler.testDelay)) seconds. Lock your phone now, then press and hold the alert to try Log Prayer."
                                 + (problems.isEmpty ? "" : "\n\n⚠️ " + problems.joined(separator: "\n⚠️ "))
-                                + "\n\nNot seeing it? A Focus (Do Not Disturb, Sleep) can hide alerts. Allow Niyat in that Focus, or turn on Time Sensitive Notifications for Niyat."
+                                + "\n\nNot seeing it? A Focus (Do Not Disturb, Sleep) can hide alerts. Allow Isfar in that Focus, or turn on Time Sensitive Notifications for Isfar."
                         }
                     }
                 } label: {
@@ -133,7 +133,7 @@ struct SettingsView: View {
             } header: {
                 Text("Adhan notifications")
             } footer: {
-                Text("Streak reminders nudge you in the evening when today isn't fully logged, and help you bring a streak back the morning after it slips. iOS limits how many alerts an app can queue, so the more alert times you choose, the fewer days ahead are covered. Open Niyat every couple of days to keep them coming.")
+                Text("Streak reminders nudge you in the evening when today isn't fully logged, and help you bring a streak back the morning after it slips. iOS limits how many alerts an app can queue, so the more alert times you choose, the fewer days ahead are covered. Open Isfar every couple of days to keep them coming.")
             }
 
 
@@ -158,7 +158,7 @@ struct SettingsView: View {
             } header: {
                 Text("Your data")
             } footer: {
-                Text("Everything Niyat stores lives on this iPhone. Erasing removes your prayer log, Qur'an progress, ribbon, saved verses, tasbih counts, theme and settings, cancels scheduled alerts, and starts the app fresh. Groups live in iCloud: leave them from Groups first if you want them gone too.")
+                Text("Everything Isfar stores lives on this iPhone. Erasing removes your prayer log, Qur'an progress, ribbon, saved verses, tasbih counts, theme and settings, cancels scheduled alerts, and starts the app fresh. Groups live in iCloud: leave them from Groups first if you want them gone too.")
             }
         }
         .confirmationDialog("Erase all data?", isPresented: $confirmErase, titleVisibility: .visible) {
@@ -227,7 +227,7 @@ private struct LocationSettingsView: View {
                 }
             }
             .disabled(isLocating)
-            Text("Each time you open Niyat, it checks where you are and moves prayer times, alerts and widgets if you've travelled. Your location stays on your device.")
+            Text("Each time you open Isfar, it checks where you are and moves prayer times, alerts and widgets if you've travelled. Your location stays on your device.")
                 .font(.footnote)
                 .foregroundStyle(.secondary)
             if let errorMessage {
