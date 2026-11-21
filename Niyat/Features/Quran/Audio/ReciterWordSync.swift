@@ -23,8 +23,8 @@ struct WordTimings: Codable, Equatable {
 
 /// Highlights the word the reciter is saying.
 ///
-/// Niyat's recitation audio has no published word timings, so each ayah's
-/// recording is aligned on the iPhone: for Hafs, Niyat's built-in recitation
+/// Isfar's recitation audio has no published word timings, so each ayah's
+/// recording is aligned on the iPhone: for Hafs, Isfar's built-in recitation
 /// model force-aligns the verified words to the recording
 /// (`ReciterModelTimings`); otherwise Apple's speech recognition transcribes
 /// the reciter (with the time of each word), and the words it recognised are

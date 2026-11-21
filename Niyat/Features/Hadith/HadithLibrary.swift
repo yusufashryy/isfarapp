@@ -1,7 +1,7 @@
 import Foundation
 import Observation
 
-/// How strong a hadith's chain is, as its grading scholar judged it. Niyat only
+/// How strong a hadith's chain is, as its grading scholar judged it. Isfar only
 /// carries the two grades scholars accept as proof (scripts/build_hadith.py).
 enum HadithLevel: String, Decodable {
     case sahih

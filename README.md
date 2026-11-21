@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/yusufashryy/niyatapp/actions/workflows/build.yml"><img src="https://github.com/yusufashryy/niyatapp/actions/workflows/build.yml/badge.svg" alt="Build"></a>
+  <a href="https://github.com/yusufashryy/isfarapp/actions/workflows/build.yml"><img src="https://github.com/yusufashryy/isfarapp/actions/workflows/build.yml/badge.svg" alt="Build"></a>
   <img src="https://img.shields.io/badge/iOS-26%2B-black?logo=apple" alt="iOS 26+">
   <img src="https://img.shields.io/badge/license-MIT-D4AF37" alt="MIT">
 </p>
@@ -77,7 +77,7 @@ You need a **Mac** with **Xcode** (free from the Mac App Store).
 2. In Xcode › Settings › Accounts, sign in with your Apple ID
 3. In Terminal:
    ```sh
-   git clone https://github.com/yusufashryy/niyatapp.git
+   git clone https://github.com/yusufashryy/isfarapp.git
    cd niyatapp
    make setup
    ```
@@ -93,7 +93,7 @@ With a free Apple ID the app works for 7 days, then press Run again. With a paid
 
 Isfar is free and always will be. If it helps you, you can leave an optional tip in the app (More › Support Isfar) to help cover the cost of being on the App Store.
 
-Found a bug or have an idea? Use **More › Send feedback** in the app, or [open an issue](https://github.com/yusufashryy/niyatapp/issues).
+Found a bug or have an idea? Use **More › Send feedback** in the app, or [open an issue](https://github.com/yusufashryy/isfarapp/issues).
 
 ## For developers
 

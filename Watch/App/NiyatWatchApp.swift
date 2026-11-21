@@ -2,7 +2,7 @@ import SwiftUI
 import UserNotifications
 import WatchKit
 
-/// Niyat on Apple Watch: the next prayer at a glance, today's times with a
+/// Isfar on Apple Watch: the next prayer at a glance, today's times with a
 /// tap to log, the Qibla, a tasbih on the Digital Crown and the Qur'an goal.
 /// Times are worked out on the watch from the location and settings the
 /// iPhone sends (see WatchSync), and its own alerts come without the iPhone.

@@ -201,7 +201,7 @@ struct AboutView: View {
                     }
                     Text("A free, open-source companion for your deen. No ads, no subscriptions, no accounts and no tracking. Everything runs on your phone.")
                         .foregroundStyle(.secondary)
-                    Link(destination: URL(string: "https://github.com/yusufashryy/niyatapp")!) {
+                    Link(destination: URL(string: "https://github.com/yusufashryy/isfarapp")!) {
                         Label("Source code on GitHub", systemImage: "chevron.left.forwardslash.chevron.right")
                             .font(.headline)
                     }

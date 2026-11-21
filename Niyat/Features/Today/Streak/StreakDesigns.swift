@@ -117,19 +117,37 @@ func streakAccent(_ tier: StreakTier) -> Color {
     tier == .ember ? .white.opacity(0.85) : .white
 }
 
-/// The Qur'an card's Read button.
+/// The Qur'an card's Read button: the user's theme colours flowing across the
+/// capsule with a soft glow, the same treatment as the streak numbers.
+/// Holds still with Reduce Motion.
 struct StreakActionLabel: View {
     let title: String
     let systemImage: String
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    /// Seconds for the bands to flow once across the button (as the streak numbers).
+    private static let period = 2.2
 
     var body: some View {
+        let light = Palette.highlight
+        let deep = Palette.highlight.mix(with: Palette.accent, by: 0.45)
         Label(title, systemImage: systemImage)
             .font(.subheadline.weight(.bold))
             .foregroundStyle(.black)
             .badgeText()
             .padding(.horizontal, 20)
             .padding(.vertical, 11)
-            .background(.white, in: .capsule)
+            .background {
+                TimelineView(.animation(minimumInterval: 1 / 60, paused: reduceMotion)) { context in
+                    let time = reduceMotion ? 0.35 * Self.period : context.date.timeIntervalSinceReferenceDate
+                    let phase = (time / Self.period).truncatingRemainder(dividingBy: 1)
+                    Capsule()
+                        .fill(StreakGradient.flow(phase: phase, light: light, deep: deep))
+                        // A tight glow and a wide one, like the streak numbers.
+                        .shadow(color: light.opacity(0.75), radius: 4)
+                        .shadow(color: deep.opacity(0.55), radius: 14)
+                }
+            }
     }
 }
 
@@ -195,8 +213,12 @@ struct StreakGradient: ViewModifier {
     /// diagonal and slid by `phase`, so the end of the loop meets its start.
     private func flow(phase: Double) -> LinearGradient {
         let colors = tier.flameColors
-        let deep = colors.fill.mix(with: colors.rim, by: 0.35)
-        let pattern: [Color] = [deep, colors.fill, deep]
+        return Self.flow(phase: phase, light: colors.fill, deep: colors.fill.mix(with: colors.rim, by: 0.35))
+    }
+
+    /// The flowing diagonal bands, shared with the Qur'an card's Read button.
+    static func flow(phase: Double, light: Color, deep: Color) -> LinearGradient {
+        let pattern: [Color] = [deep, light, deep]
         var stops: [Gradient.Stop] = []
         for repeat_ in 0..<2 {
             for (index, color) in pattern.enumerated() {

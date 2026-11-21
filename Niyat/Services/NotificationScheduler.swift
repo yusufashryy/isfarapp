@@ -190,7 +190,7 @@ enum NotificationScheduler {
     }
 
     /// Stops the rest of a whole athan: the alert was opened, dismissed or
-    /// answered, or Niyat is playing the athan itself.
+    /// answered, or Isfar is playing the athan itself.
     static func cancelAthanParts(prayer: PrayerName, dayKey: String) {
         // Every part of this prayer's athan, however many it was cut into.
         let prefix = AthanSegments.followUpPrefix(prayer: prayer, dayKey: dayKey)
@@ -429,9 +429,9 @@ enum NotificationScheduler {
     }
 }
 
-/// Shows alerts while Niyat is open, handles the "Log Prayer" button, opens
+/// Shows alerts while Isfar is open, handles the "Log Prayer" button, opens
 /// the Qur'an when a Qur'an reminder is tapped, and plays the full athan when
-/// a prayer alert is opened (or comes while Niyat is open).
+/// a prayer alert is opened (or comes while Isfar is open).
 final class NotificationPresenter: NSObject, UNUserNotificationCenterDelegate {
     static let shared = NotificationPresenter()
 
@@ -449,7 +449,7 @@ final class NotificationPresenter: NSObject, UNUserNotificationCenterDelegate {
         DispatchQueue.main.async {
             if isAthanPart {
                 // A later part of the whole athan: heard, never shown; silent
-                // if Niyat is already playing the athan itself.
+                // if Isfar is already playing the athan itself.
                 let playing = MainActor.assumeIsolated { AthanPlayer.shared.playing != nil }
                 completionHandler(playing ? [] : [.sound])
             } else if let athan {

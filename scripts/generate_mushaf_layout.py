@@ -48,7 +48,7 @@ def main(layout_repo: Path) -> None:
     quran = json.loads(QURAN.read_text())
     tanzil_pages = [(m["sura"], m["aya"]) for m in json.loads(CHAPTERS.read_text())["indexes"]["pages"]]
 
-    # Niyat shows the Bismillah of verse 1 as a header, so verse 1's words
+    # Isfar shows the Bismillah of verse 1 as a header, so verse 1's words
     # start after it (except Al-Fatiha, where it is verse 1, and At-Tawbah).
     bismillah_words = len(words_of(quran["1"][0]["text"]))
     tanzil_words = {}
@@ -63,7 +63,7 @@ def main(layout_repo: Path) -> None:
     for page in range(1, 605):
         pages[page] = json.loads((layout_repo / "mushaf" / f"page-{page:03d}.json").read_text())["lines"]
 
-    # Map each layout word (1-based) to Niyat word indices (0-based) by their
+    # Map each layout word (1-based) to Isfar word indices (0-based) by their
     # letters. A few layout words hold two Tanzil words ("بَعْدَ مَا",
     # "إِلْ يَاسِينَ"), and the layout's own text has stray spaces, so words are
     # matched letter by letter rather than by splitting its text.

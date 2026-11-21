@@ -18,7 +18,7 @@ settings:
   base:
     SWIFT_VERSION: "5.0"
     MARKETING_VERSION: "2.3.0"
-    CURRENT_PROJECT_VERSION: "22"
+    CURRENT_PROJECT_VERSION: "23"
     # iPhone and iPad.
     TARGETED_DEVICE_FAMILY: "1,2"
     # Xcode's recommended settings.
@@ -124,7 +124,7 @@ targets:
     scheme:
     scheme:
       testTargets: [NiyatTests, NiyatUITests]
-      # Test the Support Niyat tips in Xcode without App Store Connect.
+      # Test the Support Isfar tips in Xcode without App Store Connect.
       storeKitConfiguration: Config/Niyat.storekit
     settings:
       base:

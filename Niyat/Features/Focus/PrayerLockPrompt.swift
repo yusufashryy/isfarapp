@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// When to ask "Have you prayed?" as Niyat opens during a Prayer Lock.
+/// When to ask "Have you prayed?" as Isfar opens during a Prayer Lock.
 /// Pure logic (no Screen Time), so it's tested.
 enum PrayerLockPrompt {
     /// "Not yet" keeps it away this long.
@@ -86,7 +86,7 @@ struct PrayerLockPromptModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .onChange(of: scenePhase, initial: true) { _, phase in if phase == .active { check() } }
-            // A lock can start while Niyat is open: look again each minute.
+            // A lock can start while Isfar is open: look again each minute.
             .task {
                 while !Task.isCancelled {
                     try? await Task.sleep(for: .seconds(60))

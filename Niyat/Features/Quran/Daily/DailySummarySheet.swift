@@ -299,7 +299,7 @@ private struct WeekBars: View {
     }
 }
 
-/// All time: Niyat's eight-point star.
+/// All time: Isfar's eight-point star.
 private struct AllTimeStar: View {
     @State private var turned = false
 

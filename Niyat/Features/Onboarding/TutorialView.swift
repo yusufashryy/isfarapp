@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// A short swipeable walkthrough of how to use Niyat. Shown once after
-/// onboarding and any time from More › How to use Niyat.
+/// A short swipeable walkthrough of how to use Isfar. Shown once after
+/// onboarding and any time from More › How to use Isfar.
 struct TutorialView: View {
     @Environment(\.dismiss) private var dismiss
     @AppStorage(TutorialView.seenKey) private var seen = false

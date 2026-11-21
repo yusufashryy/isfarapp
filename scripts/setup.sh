@@ -1,5 +1,5 @@
 #!/bin/bash
-# One-time setup for running Niyat on your own iPhone.
+# One-time setup for running Isfar on your own iPhone.
 # Finds your Apple team ID, writes Config/Local.xcconfig and generates the Xcode project.
 # Usage: make setup
 set -e

@@ -8,7 +8,7 @@ struct TafsirTarget: Identifiable, Hashable {
 }
 
 /// The commentary on one ayah: the English Abridged Explanation, Al-Jalalayn
-/// or Ibn Kathir (chosen with the switch at the top; Niyat remembers the choice).
+/// or Ibn Kathir (chosen with the switch at the top; Isfar remembers the choice).
 struct TafsirSheet: View {
     let surah: Int
     let ayah: Int

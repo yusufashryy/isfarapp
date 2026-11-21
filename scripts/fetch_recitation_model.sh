@@ -1,5 +1,5 @@
 #!/bin/sh
-# Downloads Niyat's built-in Qur'an recitation model into the app's resources.
+# Downloads Isfar's built-in Qur'an recitation model into the app's resources.
 # It is 166 MB, too big for git, so `make` fetches it before Xcode builds (and
 # keeps it after that). Model: TheGreatQuran/QuranKarim-SpeechToText-onnxModel
 # on Hugging Face, CC BY 4.0 (credited in About & credits).

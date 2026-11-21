@@ -1,7 +1,7 @@
 import AVFoundation
 import Foundation
 
-/// Word timings for a reciter's recording from Niyat's built-in recitation
+/// Word timings for a reciter's recording from Isfar's built-in recitation
 /// model (Hafs), on the iPhone and without asking for speech recognition.
 ///
 /// The ayah's words are force-aligned to the recording (`RecitationAligner`),

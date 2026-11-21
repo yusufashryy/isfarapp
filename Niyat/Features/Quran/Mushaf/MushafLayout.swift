@@ -3,7 +3,7 @@ import Observation
 
 /// The 604 pages of the Madinah mushaf (Hafs): what sits on each of its 15
 /// lines. Built by scripts/generate_mushaf_layout.py from a published layout
-/// and checked against Niyat's own Tanzil text (page starts, every word once
+/// and checked against Isfar's own Tanzil text (page starts, every word once
 /// and in order, headers before every surah). Only positions are stored; the
 /// words themselves always come from the verified Tanzil text.
 @MainActor

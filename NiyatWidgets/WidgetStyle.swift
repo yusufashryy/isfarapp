@@ -15,7 +15,7 @@ enum WidgetStyleOption: String, AppEnum {
     var style: WidgetLook.Style { WidgetLook.Style(rawValue: rawValue) ?? .default }
 }
 
-/// Every Niyat widget has one setting: how it looks.
+/// Every Isfar widget has one setting: how it looks.
 struct WidgetStyleIntent: WidgetConfigurationIntent {
     static let title: LocalizedStringResource = "Widget Style"
     static let description = IntentDescription("Choose how the widget looks.")
@@ -72,7 +72,7 @@ extension View {
         modifier(WidgetStyleModifier(style: style))
     }
 
-    /// The widget's background: `art` in the Niyat theme, otherwise none
+    /// The widget's background: `art` in the Isfar theme, otherwise none
     /// (see `WidgetLook`).
     func widgetBackground<Art: View>(@ViewBuilder _ art: () -> Art) -> some View {
         modifier(WidgetBackgroundModifier(art: art()))

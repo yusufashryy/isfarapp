@@ -5,7 +5,7 @@ import Speech
 
 /// Finds where someone is reciting, anywhere in the Qur'an, like a song
 /// finder: listen, then name the surah and ayah. Everything runs on the
-/// iPhone: Niyat's built-in recitation model for Hafs, Apple's speech
+/// iPhone: Isfar's built-in recitation model for Hafs, Apple's speech
 /// recognition for the other readings.
 @MainActor
 @Observable

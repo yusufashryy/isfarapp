@@ -133,7 +133,7 @@ struct FeedbackView: View {
         let version = info?["CFBundleShortVersionString"] as? String ?? "?"
         let build = info?["CFBundleVersion"] as? String ?? "?"
         return """
-        Niyat \(version) (\(build)) · iOS \(UIDevice.current.systemVersion) · \(UIDevice.current.model)
+        Isfar \(version) (\(build)) · iOS \(UIDevice.current.systemVersion) · \(UIDevice.current.model)
         Method: \(model.prayerSettings.method.title) · Asr: \(model.prayerSettings.madhab.title)
         """
     }
@@ -161,7 +161,7 @@ struct FeedbackView: View {
             showMail = true
             return
         }
-        var components = URLComponents(string: "https://github.com/yusufashryy/niyatapp/issues/new")
+        var components = URLComponents(string: "https://github.com/yusufashryy/isfarapp/issues/new")
         components?.queryItems = [
             URLQueryItem(name: "title", value: subject),
             URLQueryItem(name: "body", value: fullBody),

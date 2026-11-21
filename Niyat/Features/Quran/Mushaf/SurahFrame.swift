@@ -3,7 +3,7 @@ import SwiftUI
 
 /// Where the parts of a surah heading go, for a heading of a given size, in the
 /// manner of the printed Madinah mushaf: a long cartouche for the name in the
-/// middle, a medallion on each side, interlaced arabesque all round. Niyat's
+/// middle, a medallion on each side, interlaced arabesque all round. Isfar's
 /// own layout, not a copy of any printed heading. Pure geometry, so it's tested.
 struct SurahFrameGeometry {
     let bounds: CGRect
