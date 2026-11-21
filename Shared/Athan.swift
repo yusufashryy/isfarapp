@@ -1,6 +1,6 @@
 import Foundation
 
-/// A muezzin whose athan Niyat plays: Aladhan's recordings (Islamic Network,
+/// A muezzin whose athan Isfar plays: Aladhan's recordings (Islamic Network,
 /// see docs/SOURCES.md). The alert plays a short opening bundled with the
 /// app; the full athan streams from Aladhan when you open the alert.
 enum Muezzin: String, Codable, CaseIterable, Identifiable {
@@ -73,10 +73,10 @@ struct AthanSettings: Codable, Equatable {
     var muezzin: Muezzin? = .alafasy
     /// Fajr's own athan; nil uses `muezzin`.
     var fajrMuezzin: Muezzin?
-    /// Opening the alert, or having Niyat open when it comes, plays the whole athan.
+    /// Opening the alert, or having Isfar open when it comes, plays the whole athan.
     var playsFullAthan = true
     /// The alert itself plays the whole athan, in parts sent back to back
-    /// (see `AthanSegments`), without opening Niyat.
+    /// (see `AthanSegments`), without opening Isfar.
     var fullAthanFromAlert = false
 
     init() {}

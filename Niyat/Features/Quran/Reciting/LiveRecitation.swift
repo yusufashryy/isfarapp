@@ -39,7 +39,7 @@ enum RecognitionForms {
 
 /// Live recitation: listens on the current page (or surah) and follows the
 /// reciter word by word, going to another surah when they start one. For
-/// Hafs it uses Niyat's built-in recitation model, on the iPhone; for Warsh
+/// Hafs it uses Isfar's built-in recitation model, on the iPhone; for Warsh
 /// and Qalun, Apple's speech recognition. Audio is never recorded or saved.
 ///
 /// It finds and follows; it doesn't judge recitation.
@@ -446,7 +446,7 @@ final class LiveRecitation {
         WordHighlights.shared.setCurrent(isListening ? current : nil)
         // The whole ayah stays lit while it's recited, with or without memorisation.
         if isListening, let current { showBand(on: current.verseKey) }
-        // Niyat finds and follows the reciter; it doesn't judge words, so no
+        // Isfar finds and follows the reciter; it doesn't judge words, so no
         // marks are set. Memorisation: words recited so far show through.
         var passed: [WordID] = tracker.committed.keys.map { tracker.tokens[$0].id }
         passed += tracker.provisional.compactMap { $0.value == .matched ? tracker.tokens[$0.key].id : nil }

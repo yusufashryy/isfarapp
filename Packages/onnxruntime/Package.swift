@@ -3,7 +3,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License (see LICENSE).
 //
-// Niyat's copy of microsoft/onnxruntime-swift-package-manager at 1.24.2
+// Isfar's copy of microsoft/onnxruntime-swift-package-manager at 1.24.2
 // (commit b7fb7f7), kept in the repo because the upstream GitHub repository
 // was removed on 17 Nov 2026. Only the Objective-C bindings the app uses are
 // kept; the runtime itself is still Microsoft's prebuilt framework, downloaded

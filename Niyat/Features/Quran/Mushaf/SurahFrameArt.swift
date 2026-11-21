@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// The drawing of a surah heading, in the manner of the illuminated headings of
-/// the printed Madinah mushaf (Niyat's own vector drawing, not a copy):
+/// the printed Madinah mushaf (Isfar's own vector drawing, not a copy):
 /// a double-ruled band filled with interlaced strapwork, palmette finials at
 /// its ends, a double-framed cartouche with ogee points for the name, and a
 /// scalloped, double-ringed medallion on each side. In the page's colours;

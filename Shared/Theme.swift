@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Niyat's colours, taken from the current theme (see ThemeStore.swift).
+/// Isfar's colours, taken from the current theme (see ThemeStore.swift).
 /// Dark-first and high contrast.
 enum Palette {
     private static var theme: AppTheme { ThemeManager.shared.theme }

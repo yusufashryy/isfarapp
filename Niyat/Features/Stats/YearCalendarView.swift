@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// A whole year at a glance, one square per day, for seeing consistency over
-/// the years. Every year since you started using Niyat is kept, and new years
+/// the years. Every year since you started using Isfar is kept, and new years
 /// appear as they come.
 struct YearCalendarView: View {
     enum Kind: String, CaseIterable, Identifiable {

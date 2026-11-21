@@ -124,7 +124,7 @@ targets:
     scheme:
     scheme:
       testTargets: [NiyatTests, NiyatUITests]
-      # Test the Support Niyat tips in Xcode without App Store Connect.
+      # Test the Support Isfar tips in Xcode without App Store Connect.
       storeKitConfiguration: Config/Niyat.storekit
     settings:
       base:

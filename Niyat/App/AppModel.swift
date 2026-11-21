@@ -14,7 +14,7 @@ final class AppModel {
     private(set) var records: [String: PrayerRecord]
     /// Automatic follows the device when the app opens (see AppModel+Location).
     var locationMode: LocationMode
-    /// Set after Niyat moved the location by itself, for the "Updated · Undo" banner.
+    /// Set after Isfar moved the location by itself, for the "Updated · Undo" banner.
     var recentLocationChange: LocationChange?
     /// The device time zone the user chose to keep their city for.
     var timeZonePromptDismissed: String?

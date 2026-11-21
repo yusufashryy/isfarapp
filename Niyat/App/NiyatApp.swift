@@ -76,7 +76,7 @@ struct RootView: View {
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didReceiveMemoryWarningNotification)) { _ in
             QuranMemory.releaseCaches()
         }
-        // Landing after a flight while Niyat is open: re-time alerts and check the location.
+        // Landing after a flight while Isfar is open: re-time alerts and check the location.
         .task {
             for await _ in NotificationCenter.default.notifications(named: .NSSystemTimeZoneDidChange) {
                 model.refresh()
@@ -138,7 +138,7 @@ struct MainTabView: View {
         }
         .fullScreenCover(isPresented: $showTutorial) { TutorialView() }
         #if SCREEN_TIME
-        // Opening Niyat during a Prayer Lock asks "Have you prayed?" and can unlock.
+        // Opening Isfar during a Prayer Lock asks "Have you prayed?" and can unlock.
         .modifier(PrayerLockPromptModifier())
         #endif
         // Apple's own rating prompt, a moment after a happy event (see ReviewPrompter).

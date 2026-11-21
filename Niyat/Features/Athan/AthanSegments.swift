@@ -2,7 +2,7 @@ import AVFoundation
 import Foundation
 import Observation
 
-/// The whole athan from the alert itself, without opening Niyat.
+/// The whole athan from the alert itself, without opening Isfar.
 ///
 /// iOS stops any notification sound at 30 seconds, and nothing an app can do
 /// lengthens one. So the athan is cut into parts of under 30 seconds, at the
@@ -19,7 +19,7 @@ enum AthanSegments {
     static let frame: TimeInterval = 0.1
     /// Upcoming prayers that get the whole athan. A four-minute athan is
     /// about ten parts, and iOS lets an app queue 64 alerts in all, so the
-    /// prayers after these keep the 30-second opening until Niyat is opened
+    /// prayers after these keep the 30-second opening until Isfar is opened
     /// or refreshes in the background.
     static let prayersAhead = 2
 

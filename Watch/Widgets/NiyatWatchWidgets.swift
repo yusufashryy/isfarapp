@@ -56,7 +56,7 @@ struct WatchPrayerProvider: TimelineProvider {
         let upcoming = PrayerCalculator.upcoming(after: now, count: 12, includeSunrise: true,
                                                  location: location, settings: SettingsStore.prayerSettings)
         // An entry at each prayer, so the complication flips at the adhan, and one
-        // 20 minutes before, when the Smart Stack moves Niyat to the top.
+        // 20 minutes before, when the Smart Stack moves Isfar to the top.
         let lead: TimeInterval = 20 * 60
         var entries = [WatchPrayerEntry.make(at: now)]
         for time in upcoming {

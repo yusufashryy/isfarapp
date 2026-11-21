@@ -1,7 +1,7 @@
 import Foundation
 import Observation
 
-/// The tafsirs bundled with Niyat: the English Abridged Explanation from
+/// The tafsirs bundled with Isfar: the English Abridged Explanation from
 /// QuranEnc (scripts/build_tafsir_en.py) and two Arabic classics from
 /// Quranpedia (scripts/build_tafsir.py). Sources in docs/SOURCES.md.
 enum TafsirBook: String, CaseIterable, Identifiable {

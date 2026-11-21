@@ -5,11 +5,11 @@ import Foundation
 enum LocationMode: String, Codable {
     /// Follows the device: re-checked each time the app opens.
     case automatic
-    /// A city the user picked. Niyat only asks when the clock's time zone changes.
+    /// A city the user picked. Isfar only asks when the clock's time zone changes.
     case manual
 }
 
-/// A location change Niyat made by itself, kept so it can be undone.
+/// A location change Isfar made by itself, kept so it can be undone.
 struct LocationChange: Equatable {
     let previous: SavedLocation
     let current: SavedLocation

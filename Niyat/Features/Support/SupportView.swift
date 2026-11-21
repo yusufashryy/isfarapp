@@ -2,7 +2,7 @@ import StoreKit
 import SwiftUI
 
 /// Optional one-time tips through Apple's In-App Purchase, to help cover the
-/// cost of keeping Niyat on the App Store. Nothing is unlocked by tipping:
+/// cost of keeping Isfar on the App Store. Nothing is unlocked by tipping:
 /// every feature stays free for everyone.
 ///
 /// The three products are "consumable" in-app purchases, set up in App Store

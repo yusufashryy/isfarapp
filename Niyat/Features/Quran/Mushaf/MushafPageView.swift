@@ -4,7 +4,7 @@ import UIKit
 /// The Qur'an page by page, laid out like the printed Madinah mushaf: the
 /// same 604 pages and the same 15 lines on each page, each line justified to
 /// the full width. The line breaks come from a published layout of the
-/// Madinah mushaf, checked word by word against Niyat's verified text, which
+/// Madinah mushaf, checked word by word against Isfar's verified text, which
 /// is what's drawn (see MushafLayout and docs/SOURCES.md).
 ///
 /// Everything happens on the page: tap a verse for its options, play the

@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// How a widget is drawn: plain (the default) or on Niyat's painted theme.
+/// How a widget is drawn: plain (the default) or on Isfar's painted theme.
 ///
 /// Plain asks for no background. On the Default Home Screen look iOS fills
 /// it with its own (white, or black in dark mode; no app can be see-through

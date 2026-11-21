@@ -68,8 +68,8 @@ Primary: Lifestyle (or Reference). Secondary: Books.
 4+ (no objectionable content).
 
 ## URLs
-- Privacy Policy URL: https://yusufashryy.github.io/niyatapp/privacy (after enabling GitHub Pages, see below)
-- Support URL: https://github.com/yusufashryy/niyatapp/issues
+- Privacy Policy URL: https://yusufashryy.github.io/isfarapp/privacy (after enabling GitHub Pages, see below)
+- Support URL: https://github.com/yusufashryy/isfarapp/issues
 
 ## App Privacy ("nutrition label")
 Answer **"No, we do not collect data from this app."** Isfar has no server and no analytics. Apple's own services (geocoding, iCloud, In-App Purchase, speech recognition) don't count as the app collecting data: the developer never receives any of it.
@@ -94,4 +94,4 @@ iPhone 6.9" (1320 × 2868) and iPad 13" (2064 × 2752). CI's demo tour takes the
 ## Enabling the privacy policy page (free)
 1. On GitHub: repo **Settings › Pages**.
 2. Source: **Deploy from a branch**, branch **main**, folder **/docs**. Save.
-3. After a minute the policy is live at https://yusufashryy.github.io/niyatapp/privacy
+3. After a minute the policy is live at https://yusufashryy.github.io/isfarapp/privacy

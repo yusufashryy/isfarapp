@@ -59,4 +59,4 @@ If this policy changes, the new version will be published at this address, with 
 
 ## Contact
 
-Questions: open an issue at [github.com/yusufashryy/niyatapp](https://github.com/yusufashryy/niyatapp/issues).
+Questions: open an issue at [github.com/yusufashryy/isfarapp](https://github.com/yusufashryy/isfarapp/issues).
